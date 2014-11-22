@@ -61,7 +61,7 @@ import org.apache.poi.ss.usermodel.Row;
 //       AllRecentResults.add(recentdraw);
 //       }
                  
-      for(m=0;m<100;m++){   	
+      for(m=0;m<1000;m++){   	
     	lky=Integer.parseInt(lucky);
     	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
  
@@ -91,22 +91,23 @@ import org.apache.poi.ss.usermodel.Row;
     public static void getresult(){
    	int[] drawFromPossible=new int[k];
     	int[] drawFromRecent=new int[k];
+    	int x,y;
     	for(int i=0;i<AllPossiblities.size();i++){
     		drawFromPossible=(int[]) AllPossiblities.get(i);
     		int count=0;
     		for(int j=0;j<AllRecentResults.size();j++){
     			drawFromRecent=(int[]) AllRecentResults.get(j);    			
     			
-    			for(int x=0;x<k;x++){
-    				for(int y=0;y<k;y++){
+    			for(x=0;x<k;x++){
+    				for(y=0;y<k;y++){
     				if(drawFromPossible[x]==drawFromRecent[y])	
     					count++;
     				}
     			}
-    			
+    			if(count<1)
+    				FinalResults.add(drawFromPossible);
     			}
-    		if(count<1)
-				FinalResults.add(drawFromPossible);
+    		
     	}
     	    }  
     
