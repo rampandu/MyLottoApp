@@ -3,10 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -37,7 +34,7 @@ import org.apache.poi.ss.usermodel.Row;
        
        int[] luckynumbers = new int[lky];
        int[] numbersCopy=new int[lky];
-       int[] recentdraw=new int[k];
+//       int[] recentdraw=new int[k];
        int[] result; 
        int m=0;       
       
@@ -50,9 +47,9 @@ import org.apache.poi.ss.usermodel.Row;
        luckynumbers=ReadLuckyNumFromXL();
 
        
-      String input3 = JOptionPane.showInputDialog
-    	          ("enter no. of recent draws");
-    	       int draws = Integer.parseInt(input3);
+//      String input3 = JOptionPane.showInputDialog
+//    	          ("enter no. of recent draws");
+//    	       int draws = Integer.parseInt(input3);
     	       AllRecentResults=ReadRecentResultsFromXL();
        
 //       for(int z=0;z<draws;z++){
@@ -134,11 +131,11 @@ import org.apache.poi.ss.usermodel.Row;
             HSSFSheet sheet = workbook.getSheetAt(0);
             Iterator<Row> rows = sheet.rowIterator();
             int i=0;
-            while (rows.hasNext()) {
+            while (rows.hasNext() ) {
                 HSSFRow row = (HSSFRow) rows.next();
                 Iterator<Cell> cells = row.cellIterator();
  
-                               while (cells.hasNext()) {
+                               while (cells.hasNext()&& i<lky) {
                 	Cell  cell=(HSSFCell) cells.next();
                 	cell.setCellType(Cell.CELL_TYPE_NUMERIC);
                 	
@@ -154,11 +151,14 @@ import org.apache.poi.ss.usermodel.Row;
                 fis.close();
             }
         }
+        Arrays.sort(sheetData);
  return sheetData;
             }
+    
+    
     public static ArrayList<Object> ReadRecentResultsFromXL() throws Exception {
         String filename = "recentresults.xls";
-   int[] sheetData = new int[k];
+   int[] sheetData;
    ArrayList<Object> RecentResultsList=new ArrayList<>();
    FileInputStream fis = null;
   try {
@@ -166,17 +166,20 @@ import org.apache.poi.ss.usermodel.Row;
       HSSFWorkbook workbook = new HSSFWorkbook(fis);
       HSSFSheet sheet = workbook.getSheetAt(0);
       Iterator<Row> rows = sheet.rowIterator();
-      int i=0;
+    
       while (rows.hasNext()) {
+    	  sheetData=new int[k];
           HSSFRow row = (HSSFRow) rows.next();
           Iterator<Cell> cells = row.cellIterator();
-int c;
-             for(c=0;c<k;c++) {
+           int c=0;
+           
+             while(cells.hasNext() && c<k ) {
           	Cell  cell=(HSSFCell) cells.next();
           	cell.setCellType(Cell.CELL_TYPE_NUMERIC);          	
-          	sheetData[i]=(int)cell.getNumericCellValue();
-          	i++;
-          }
+          	sheetData[c]=(int)cell.getNumericCellValue();
+          	c++;
+          	          }
+             Arrays.sort(sheetData);
 RecentResultsList.add(sheetData);
       }
   } catch (IOException e) {
