@@ -1,9 +1,15 @@
- import java.io.FileInputStream;
+ import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+
 import javax.swing.JOptionPane;
+
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -19,6 +25,12 @@ import org.apache.poi.ss.usermodel.Row;
      static int k;
      static int res=0;
      static int lky;
+     static int[] luckynumbers = new int[lky];
+     static int[] numbersCopy=new int[lky];
+// static    int[] recentdraw=new int[k];
+     static int[] result; 
+     static int m=0;  
+     static String lucky;
     public static void main(String[] args) throws Exception
     {
     String input = JOptionPane.showInputDialog
@@ -29,14 +41,9 @@ import org.apache.poi.ss.usermodel.Row;
 //          ("What is the highest number you can draw?");
 //       int n = Integer.parseInt(input1);
        
-       String lucky=JOptionPane.showInputDialog("how many lucky numbers you have???");
-	 	 lky=Integer.parseInt(lucky);
-       
-       int[] luckynumbers = new int[lky];
-       int[] numbersCopy=new int[lky];
-//       int[] recentdraw=new int[k];
-       int[] result; 
-       int m=0;       
+       lucky=JOptionPane.showInputDialog("how many lucky numbers you have???");
+	 	 lky=Integer.parseInt(lucky);     
+           
       
 //      for (int d = 0; d < lky; d++){
 //   	 String luckynum=	JOptionPane.showInputDialog("Enter your "+(d+1)+"Lukcky number of "+lky);
@@ -50,7 +57,7 @@ import org.apache.poi.ss.usermodel.Row;
 //      String input3 = JOptionPane.showInputDialog
 //    	          ("enter no. of recent draws");
 //    	       int draws = Integer.parseInt(input3);
-    	       AllRecentResults=ReadRecentResultsFromXL();
+    	AllRecentResults=ReadRecentResultsFromXL();
        
 //       for(int z=0;z<draws;z++){
 //       for(int y=0;y<recentdraw.length;y++){
@@ -61,52 +68,62 @@ import org.apache.poi.ss.usermodel.Row;
 //       AllRecentResults.add(recentdraw);
 //       }
                  
-      for(m=0;m<1000;m++){   	
-    	lky=Integer.parseInt(lucky);
-    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
- 
-    	 result=new int[k];
-      for (int i = 0; i < k; i++){
-          int r = (int)(Math.random() * lky);
-          result[i] = numbersCopy[r];
-          numbersCopy[r] = numbersCopy[lky - 1];
-          lky--;          
-       }
-          Arrays.sort(result);
-       AllPossiblities.add(result);     
-       if(k==6)
-          System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+" "+result[5]+"  possible: "+res);         
-//       else if(k==5)
-//    	   System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+"  possible: "+res);         
-      
-       else
-    	   System.out.println("Please check no. of numbers to be selected");    	   
-    	   res++;
-      }
+     getAllPossibles();
             getresult();
             displayResult();
+            WriteFinalResultsToExcel();
           System.exit(0);
     }
     
-    public static void getresult(){
+    private static void getAllPossibles() {
+    	 for(m=0;m<100000;m++){   	
+    	    	lky=Integer.parseInt(lucky);
+    	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
+    	 
+    	    	 result=new int[k];
+    	      for (int i = 0; i < k; i++){
+    	          int r = (int)(Math.random() * lky);
+    	          result[i] = numbersCopy[r];
+    	          numbersCopy[r] = numbersCopy[lky - 1];
+    	          lky--;          
+    	       }
+    	          Arrays.sort(result);
+    	       AllPossiblities.add(result);     
+    	       if(k==6)
+    	          System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+" "+result[5]+"  possible: "+res);         
+//    	       else if(k==5)
+//    	    	   System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+"  possible: "+res);         
+    	      
+    	       else
+    	    	   System.out.println("Please check no. of numbers to be selected");    	   
+    	    	   res++;
+    	      }
+		
+	}
+
+	public static void getresult(){
    	int[] drawFromPossible=new int[k];
     	int[] drawFromRecent=new int[k];
     	int x,y;
+    	int xTest,yTest;
     	for(int i=0;i<AllPossiblities.size();i++){
     		drawFromPossible=(int[]) AllPossiblities.get(i);
     		int count=0;
     		for(int j=0;j<AllRecentResults.size();j++){
     			drawFromRecent=(int[]) AllRecentResults.get(j);    			
-    			
+  			 count=0;
     			for(x=0;x<k;x++){
     				for(y=0;y<k;y++){
+    					xTest=drawFromPossible[x];
+    					yTest=drawFromRecent[y];
     				if(drawFromPossible[x]==drawFromRecent[y])	
     					count++;
     				}
     			}
-    			if(count<1)
-    				FinalResults.add(drawFromPossible);
+    			
     			}
+    		if(count==1)
+				FinalResults.add(drawFromPossible);
     		
     	}
     	    }  
@@ -192,6 +209,68 @@ RecentResultsList.add(sheetData);
   }
 return RecentResultsList;
       }
+    
+    
+    public static void WriteFinalResultsToExcel(){
+   
+    	        // TODO Auto-generated method stub
+    	        String FileName = "Final-Results.xls";
+
+    	        try 
+    	        {
+    	            FileInputStream fileInputStream3 = new FileInputStream(FileName);
+    	            File outputsheetfile1 = new File(FileName);
+    	            if(outputsheetfile1.exists()) 
+    	            {
+    	                System.out.println("File existed");
+    	                try
+    	                {
+    	                	HSSFWorkbook workbook = new HSSFWorkbook();
+    	                    HSSFSheet sheet = workbook.createSheet("Course Pack Resolution Details");
+    	                    FileName = outputsheetfile1.getAbsolutePath(); 
+    	                    int rownum = 0;
+    	                    for (int i = 0; i < FinalResults.size(); i++) {
+    	                        Object[] objArr = (Object[]) FinalResults.get(i);
+    	                        HSSFRow row = sheet.createRow(rownum++);
+
+    	                        int cellnum = 0;
+    	                        for (Object obj : objArr) {
+    	                            Cell cell = row.createCell(cellnum++);
+    	                            sheet.autoSizeColumn((short) cellnum);
+    	                            if (obj instanceof Date) {
+    	                                cell.setCellValue((Date) obj);
+    	                            } else if (obj instanceof Boolean) {
+    	                                cell.setCellValue((Boolean) obj);
+    	                            } else if (obj instanceof String) {
+    	                                cell.setCellValue((String) obj);
+    	                            } else if (obj instanceof Double) {
+    	                                cell.setCellValue((Double) obj);
+    	                            }
+    	                        }
+    	                    }
+    	                    if (outputsheetfile1.exists()) {
+    	                        outputsheetfile1.delete();
+    	                    }
+    	                    FileOutputStream out =
+    	                            new FileOutputStream(outputsheetfile1);
+    	                    workbook.write(out);
+    	                     fileInputStream3.close();
+    	                    }
+
+    	                 
+    	            catch (IOException e) 
+    	            {
+    	                // TODO Auto-generated catch block
+    	                e.printStackTrace();
+    	            }
+
+    	            }
+    	        } catch (FileNotFoundException e) {
+    	            // TODO Auto-generated catch block
+    	            e.printStackTrace();
+    	        }
+    	       
+    }
 
 
     
