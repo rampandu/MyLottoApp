@@ -71,12 +71,12 @@ import org.apache.poi.ss.usermodel.Row;
      getAllPossibles();
             getresult();
             displayResult();
-            WriteFinalResultsToExcel();
+//            WriteFinalResultsToExcel();
           System.exit(0);
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<100000;m++){   	
+    	 for(m=0;m<1000;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -122,7 +122,7 @@ import org.apache.poi.ss.usermodel.Row;
     			}
     			
     			}
-    		if(count==1)
+    		if(count==2)
 				FinalResults.add(drawFromPossible);
     		
     	}
@@ -230,22 +230,14 @@ return RecentResultsList;
     	                    FileName = outputsheetfile1.getAbsolutePath(); 
     	                    int rownum = 0;
     	                    for (int i = 0; i < FinalResults.size(); i++) {
-    	                        Object[] objArr = (Object[]) FinalResults.get(i);
+    	                        int[] intArr = (int[]) FinalResults.get(i);
     	                        HSSFRow row = sheet.createRow(rownum++);
 
     	                        int cellnum = 0;
-    	                        for (Object obj : objArr) {
+    	                        for (int intVal : intArr) {
     	                            Cell cell = row.createCell(cellnum++);
-    	                            sheet.autoSizeColumn((short) cellnum);
-    	                            if (obj instanceof Date) {
-    	                                cell.setCellValue((Date) obj);
-    	                            } else if (obj instanceof Boolean) {
-    	                                cell.setCellValue((Boolean) obj);
-    	                            } else if (obj instanceof String) {
-    	                                cell.setCellValue((String) obj);
-    	                            } else if (obj instanceof Double) {
-    	                                cell.setCellValue((Double) obj);
-    	                            }
+    	                            sheet.autoSizeColumn((short) cellnum);    	                            
+    	                                cell.setCellValue(intVal);    	                           
     	                        }
     	                    }
     	                    if (outputsheetfile1.exists()) {
