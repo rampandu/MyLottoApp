@@ -91,8 +91,8 @@ import org.apache.poi.ss.usermodel.Row;
     	       AllPossiblities.add(result);     
     	       if(k==6)
     	          System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+" "+result[5]+"  possible: "+res);         
-//    	       else if(k==5)
-//    	    	   System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+"  possible: "+res);         
+    	       else if(k==5)
+    	    	   System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+"  possible: "+res);         
     	      
     	       else
     	    	   System.out.println("Please check no. of numbers to be selected");    	   
@@ -134,8 +134,10 @@ import org.apache.poi.ss.usermodel.Row;
     	for(int a=0;a<FinalResults.size();a++){
     		drawFromFinal=new int[k];
     		drawFromFinal=(int[]) FinalResults.get(a);
-    		
+    		if(k==6)
     		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a); 
+    		else if (k==5)
+    			System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+"  Result: "+a);
     	}
     }
     
