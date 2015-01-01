@@ -76,7 +76,7 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<1000;m++){   	
+    	 for(m=0;m<300;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
