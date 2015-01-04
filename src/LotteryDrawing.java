@@ -72,12 +72,11 @@ import org.apache.poi.ss.usermodel.Row;
             getresult();
             displayResult();
 //            WriteFinalResultsToExcel();
-            displayFilteredResult();
           System.exit(0);
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<1000;m++){   	
+    	 for(m=0;m<300;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -123,7 +122,7 @@ import org.apache.poi.ss.usermodel.Row;
     			}
     			
     			}
-    		if(count==2 || count==1)
+    		if(count==2)
 				FinalResults.add(drawFromPossible);
     		
     	}
@@ -138,32 +137,6 @@ import org.apache.poi.ss.usermodel.Row;
     		
     		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a); 
     	}
-    }
-    
-    public static void displayFilteredResult(){
-    	System.out.println("\n The Final filtered Results are: \n");
-//    	int[] filterFromFinal=new int[2*k];
-    	int[]	filterFromFinal={1,10,21,23,33,47,6,30,32,37,39,44};
-    	int[] drawFromFinal=new int[k];
-    	for(int a=0;a<FinalResults.size();a++){
-    		drawFromFinal=new int[k];
-    		drawFromFinal=(int[]) FinalResults.get(a);
-    	int	checkcount=0,h,l;
-    		for(h=0;h<k;h++){
-    		for(l=0;l<12;l++){
-    			if(drawFromFinal[h]==filterFromFinal[l]){
-    				checkcount++;
-    				h=7;
-    				l=13;
-    			}
-    			
-    		}
-   }
-    		if(checkcount==0)
-    			System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Filtered Result: "+a); 
-//    		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a); 
-    		
-    		}
     }
     
     public static int[] ReadLuckyNumFromXL() throws Exception {
