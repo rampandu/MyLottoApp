@@ -72,11 +72,39 @@ import org.apache.poi.ss.usermodel.Row;
             getresult();
             displayResult();
 //            WriteFinalResultsToExcel();
-            displayFilteredResult();
+//            displayFilteredResult();
+            checkResults();
           System.exit(0);
     }
     
-    private static void getAllPossibles() {
+    private static void checkResults() {
+    	System.out.println("\n The Final filtered Results are: \n");
+//	int[] filterFromFinal=new int[2*k];
+	int[]	filterFromFinal={1,10,21,23,33,47};
+	int[] drawFromFinal=new int[k];
+	for(int a=0;a<FinalResults.size();a++){
+		drawFromFinal=new int[k];
+		drawFromFinal=(int[]) FinalResults.get(a);
+	int	checkcount=0,h,l;
+		for(h=0;h<k;h++){
+		for(l=0;l<6;l++){
+			if(drawFromFinal[h]==filterFromFinal[l]){
+				checkcount++;
+				h=7;
+				l=13;
+			}
+			
+		}
+}
+		if(checkcount==0)
+			System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Filtered Result: "+a); 
+//		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a); 
+		
+		}
+		
+	}
+
+	private static void getAllPossibles() {
     	 for(m=0;m<1000;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
@@ -112,18 +140,19 @@ import org.apache.poi.ss.usermodel.Row;
     		int count=0;
     		for(int j=0;j<AllRecentResults.size();j++){
     			drawFromRecent=(int[]) AllRecentResults.get(j);    			
-  			 count=0;
+ 			 count=0;
     			for(x=0;x<k;x++){
-    				for(y=0;y<k;y++){
-    					xTest=drawFromPossible[x];
+    				xTest=drawFromPossible[x];
+    				for(y=0;y<k;y++){    					
     					yTest=drawFromRecent[y];
-    				if(drawFromPossible[x]==drawFromRecent[y])	
+    				if(xTest==yTest)	
     					count++;
     				}
     			}
     			
     			}
-    		if(count==2 || count==1)
+//    		if(count==2 || count==1 )
+    		if(count<=6)
 				FinalResults.add(drawFromPossible);
     		
     	}
@@ -135,36 +164,41 @@ import org.apache.poi.ss.usermodel.Row;
     	for(int a=0;a<FinalResults.size();a++){
     		drawFromFinal=new int[k];
     		drawFromFinal=(int[]) FinalResults.get(a);
-    		
+    		int consCount=0;
+    		for(int t=0;t<(drawFromFinal.length-1);t++){
+    		if((drawFromFinal[t+1]-drawFromFinal[t])==1)
+    			consCount++;
+    		}
+    		if(consCount==2)    			    		
     		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a); 
     	}
     }
     
-    public static void displayFilteredResult(){
-    	System.out.println("\n The Final filtered Results are: \n");
-//    	int[] filterFromFinal=new int[2*k];
-    	int[]	filterFromFinal={1,10,21,23,33,47,6,30,32,37,39,44};
-    	int[] drawFromFinal=new int[k];
-    	for(int a=0;a<FinalResults.size();a++){
-    		drawFromFinal=new int[k];
-    		drawFromFinal=(int[]) FinalResults.get(a);
-    	int	checkcount=0,h,l;
-    		for(h=0;h<k;h++){
-    		for(l=0;l<12;l++){
-    			if(drawFromFinal[h]==filterFromFinal[l]){
-    				checkcount++;
-    				h=7;
-    				l=13;
-    			}
-    			
-    		}
-   }
-    		if(checkcount==0)
-    			System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Filtered Result: "+a); 
-//    		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a); 
-    		
-    		}
-    }
+//    public static void displayFilteredResult(){
+//    	System.out.println("\n The Final filtered Results are: \n");
+////    	int[] filterFromFinal=new int[2*k];
+//    	int[]	filterFromFinal={1,10,21,23,33,47,6,30,32,37,39,44};
+//    	int[] drawFromFinal=new int[k];
+//    	for(int a=0;a<FinalResults.size();a++){
+//    		drawFromFinal=new int[k];
+//    		drawFromFinal=(int[]) FinalResults.get(a);
+//    	int	checkcount=0,h,l;
+//    		for(h=0;h<k;h++){
+//    		for(l=0;l<12;l++){
+//    			if(drawFromFinal[h]==filterFromFinal[l]){
+//    				checkcount++;
+//    				h=7;
+//    				l=13;
+//    			}
+//    			
+//    		}
+//   }
+//    		if(checkcount==0)
+//    			System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Filtered Result: "+a); 
+////    		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a); 
+//    		
+//    		}
+//    }
     
     public static int[] ReadLuckyNumFromXL() throws Exception {
               String filename = "luckynumbers.xls";
