@@ -8,28 +8,36 @@ import javax.swing.JOptionPane;
 {
      static ArrayList<Object> FinalResults=new ArrayList<>();
 static ArrayList<Integer> finalArrayList=new ArrayList<>();
-	 static int[] A,B,C,D,E;
-	static int a,b,c,d,e;
+	 static int[] A,B,C,D,E,F,G;
+	static int a,b,c,d,e,f,g;
+	static int est;
     public static void main(String[] args) throws Exception
     {
     	//READING ARRAY SIZES
-    	int numSize[];
-    	numSize=new int[5];
     	
-    	for(int t=0;t<5;t++){
+    	 String input1 = JOptionPane.showInputDialog
+    		      ("WELCOME !!! Enter size of guess numbers... ");
+    	est=Integer.parseInt(input1);
+    	int numSize[];
+    	numSize=new int[est];
+    	for(int t=0;t<est;t++){
       String input = JOptionPane.showInputDialog
-      ("Enter choice nums length for  "+(t));
+      ("Enter choice nums length for  "+(t+1));
   numSize[t]= Integer.parseInt(input);}
     	a=numSize[0];
     	b=numSize[1];
     	c=numSize[2];
     	d=numSize[3];
     	e=numSize[4];
+    	f=numSize[5];
+    	g=numSize[6];
     	A=new int[a];
     	B=new int[b];
     	C=new int[c];
     	D=new int[d];
-    	E=new int[e]; 
+    	E=new int[e];
+    	F=new int[f];
+    	G=new int[g];
   
  // READING VALUES FOR ALL ARRAYS
     for (int p= 0; p <a; p++){
@@ -57,6 +65,16 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	E[p]=Integer.parseInt(num);
     	finalArrayList.add(Integer.parseInt(num));
     }
+    for (int p= 0; p <f; p++){
+    	String num=	JOptionPane.showInputDialog("Enter FAV num for F "+(p+1));
+    	F[p]=Integer.parseInt(num);
+    	finalArrayList.add(Integer.parseInt(num));
+    }
+    for (int p= 0; p <g; p++){
+    	String num=	JOptionPane.showInputDialog("Enter FAV num for E "+(p+1));
+    	G[p]=Integer.parseInt(num);
+    	finalArrayList.add(Integer.parseInt(num));
+    }
     
     // CONVERT ARRAYLIST TO ARRAY
    Object[] fullArray=finalArrayList.toArray();
@@ -64,33 +82,40 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
    for(int temp=0;temp<fullArray.length;temp++){
 	   convertedArray[temp]=(int)fullArray[temp];
    }
-   Arrays.sort(convertedArray);
+  
     // SORTING ALL ARRAYS
+   Arrays.sort(convertedArray);
     Arrays.sort(A);
     Arrays.sort(B);
     Arrays.sort(C);
     Arrays.sort(D);
     Arrays.sort(E);
+    Arrays.sort(F);
+    Arrays.sort(G);
+    
+    // PRINT ARRAY
     for(int g=0;g<convertedArray.length;g++)
-    	System.out.println(convertedArray[g]);
-//   generateCombinations(convertedArray, 5);
+    	System.out.println(convertedArray[g]+"\t");
    
-    // GENERATING FINAL NUMS COMBINATIONS
-    
-    
-    int i,j,k,l,m;
+    // GENERATING FINAL NUMS COMBINATIONS        
+    int i,j,k,l,m,n,o;
         	
     for(i=0;i<a;i++){
     	for(j=0;j<b;j++){
     		for(k=0;k<c;k++){
     			for(l=0;l<d;l++){
     				for(m=0;m<e;m++){
-    					int[] genArray=new int[5];
+    					for(n=0;n<e;n++){
+    						for(o=0;o<e;o++){
+    					
+    					int[] genArray=new int[est];
     					genArray[0]=A[i];
     					genArray[1]=B[j];
     					genArray[2]=C[k];
     					genArray[3]=D[l];
     					genArray[4]=E[m];
+    					genArray[5]=F[n];
+    					genArray[6]=G[o];
     				
     					FinalResults.add(genArray);
     				}
@@ -98,73 +123,49 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     		}
     	}
     }
+  }
+}
+    filterResults();
    displayResult(); 
     }
     
-    public static void displayResult(){
+    private static void filterResults() {
+for(int q=0;q<FinalResults.size();q++){
+	int[] origRes=new int[est];
+	origRes=(int[])FinalResults.get(q);
+	for(int s=1;s<FinalResults.size();s++){
+		int[] tempRes=new int[est];
+		tempRes=(int[])FinalResults.get(s);
+		int	checkcount=0,h,l;
+		   		for(h=0;h<origRes.length;h++){
+		   		for(l=0;l<tempRes.length;l++){
+		    			if(origRes[h]==tempRes[l]){
+		    				checkcount++;
+//		    				h=7;
+//		    				l=13;
+		    			}
+		    			
+		    		}
+		   }
+		   		if(checkcount>=5)
+		   			FinalResults.remove(s);
+	}
+}
+	}
+
+	public static void displayResult(){
     	System.out.println("\n The Final Results are: \n");
-    	int[] result1=new int[5];
+    	int[] result1=new int[est];
     	for(int a=0;a<FinalResults.size();a++){
     		result1=new int[5];
     		result1=(int[]) FinalResults.get(a);
     		
-    		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+"  Result: "+a); 
+    		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+result1[5]+" "+result1[6]+"  Result: "+(a+1)); 
     	}
     }
     
       
-    public static void generateCombinations(int[]  fullArray1, int K){
-   	 
-        int N = fullArray1.length;
- 
-if(K > N){
-    System.out.println("Invalid input, K > N");
-    return;
-}
-
-int combination[] = fullArray1;
-int r = 0;      
-int index = 0;
- 
-while(r >= 0){
-    if(index <= (N + (r - K))){
-            combination[r] = index;
-             
-        if(r == K-1){
-
-           addToFinalList(combination);
-            index++;                
-        }
-        else{
-            index = combination[r]+1;
-            r++;                                        
-        }
-    }
-    else{
-        r--;
-        if(r > 0)
-            index = combination[r]+1;
-        else
-            index = combination[0]+1;   
-    }           
-}
-}
-	private static void addToFinalList(int[] combination) {
-		FinalResults.add(combination);
-		printResults();
-	}
-	private static void printResults() {
-	   
-    	System.out.println("\n The Final Results are: \n");
-    	int[] res;
-    	for(int a=0;a<FinalResults.size();a++){
-    		res=new int[5];
-    		res=(int[]) FinalResults.get(a);
-    		
-    		 System.out.println(res[0]+" "+res[1]+" "+res[2]+" "+res[3]+" "+res[4]+" "+"  Result: "+a); 
-    	
-    }
-	}
+    
  }
  
  
