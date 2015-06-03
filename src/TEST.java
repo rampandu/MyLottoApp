@@ -105,8 +105,8 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     		for(k=0;k<c;k++){
     			for(l=0;l<d;l++){
     				for(m=0;m<e;m++){
-    					for(n=0;n<e;n++){
-    						for(o=0;o<e;o++){
+    					for(n=0;n<f;n++){
+    						for(o=0;o<g;o++){
     					
     					int[] genArray=new int[est];
     					genArray[0]=A[i];
@@ -147,7 +147,7 @@ for(int q=0;q<FinalResults.size();q++){
 		    			
 		    		}
 		   }
-		   		if(checkcount>=5)
+		   		if(checkcount>=3)
 		   			FinalResults.remove(s);
 	}
 }
