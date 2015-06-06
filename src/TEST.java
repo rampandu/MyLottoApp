@@ -29,15 +29,19 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	c=numSize[2];
     	d=numSize[3];
     	e=numSize[4];
-    	f=numSize[5];
-    	g=numSize[6];
+    	
     	A=new int[a];
     	B=new int[b];
     	C=new int[c];
     	D=new int[d];
     	E=new int[e];
+    	if(est>5){
+    	f=numSize[5];
+    	g=numSize[6];
+    	
     	F=new int[f];
     	G=new int[g];
+    	}
   
  // READING VALUES FOR ALL ARRAYS
     for (int p= 0; p <a; p++){
@@ -65,6 +69,8 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	E[p]=Integer.parseInt(num);
     	finalArrayList.add(Integer.parseInt(num));
     }
+    
+    if(est>5){
     for (int p= 0; p <f; p++){
     	String num=	JOptionPane.showInputDialog("Enter FAV num for F "+(p+1));
     	F[p]=Integer.parseInt(num);
@@ -74,6 +80,7 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	String num=	JOptionPane.showInputDialog("Enter FAV num for E "+(p+1));
     	G[p]=Integer.parseInt(num);
     	finalArrayList.add(Integer.parseInt(num));
+    }
     }
     
     // CONVERT ARRAYLIST TO ARRAY
@@ -85,13 +92,13 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
   
     // SORTING ALL ARRAYS
    Arrays.sort(convertedArray);
-    Arrays.sort(A);
-    Arrays.sort(B);
-    Arrays.sort(C);
-    Arrays.sort(D);
-    Arrays.sort(E);
-    Arrays.sort(F);
-    Arrays.sort(G);
+//    Arrays.sort(A);
+//    Arrays.sort(B);
+//    Arrays.sort(C);
+//    Arrays.sort(D);
+//    Arrays.sort(E);
+//    Arrays.sort(F);
+//    Arrays.sort(G);
     
     // PRINT ARRAY
     for(int g=0;g<convertedArray.length;g++)
@@ -99,38 +106,38 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
    
     // GENERATING FINAL NUMS COMBINATIONS        
     int i,j,k,l,m,n,o;
-        	
+    int[] genArray=new int[est];
     for(i=0;i<a;i++){
     	for(j=0;j<b;j++){
     		for(k=0;k<c;k++){
     			for(l=0;l<d;l++){
     				for(m=0;m<e;m++){
-    					for(n=0;n<f;n++){
-    						for(o=0;o<g;o++){
-    					
-    					int[] genArray=new int[est];
+    					genArray=new int[est];
+   					
     					genArray[0]=A[i];
     					genArray[1]=B[j];
     					genArray[2]=C[k];
     					genArray[3]=D[l];
     					genArray[4]=E[m];
+    					if(est>5){
+						for(n=0;n<f;n++){
+						for(o=0;o<g;o++){    					
     					genArray[5]=F[n];
     					genArray[6]=G[o];
-    				
-    					FinalResults.add(genArray);
+    					} }
+    					}
+				FinalResults.add(genArray);
     				}
     			}
     		}
     	}
     }
-  }
-}
     filterResults();
-   displayResult(); 
+    displayResult();
     }
     
     private static void filterResults() {
-for(int q=0;q<FinalResults.size();q++){
+for(int q=0;q<(FinalResults.size()-1);q++){
 	int[] origRes=new int[est];
 	origRes=(int[])FinalResults.get(q);
 	for(int s=1;s<FinalResults.size();s++){
@@ -138,18 +145,16 @@ for(int q=0;q<FinalResults.size();q++){
 		tempRes=(int[])FinalResults.get(s);
 		int	checkcount=0,h,l;
 		   		for(h=0;h<origRes.length;h++){
-		   		for(l=0;l<tempRes.length;l++){
-		    			if(origRes[h]==tempRes[l]){
+//		   		for(l=0;l<tempRes.length;l++){
+		    			if(origRes[h]==tempRes[h])
 		    				checkcount++;
-//		    				h=7;
-//		    				l=13;
-		    			}
-		    			
-		    		}
+//		   		}
 		   }
-		   		if(checkcount>=3)
-		   			FinalResults.remove(s);
-	}
+		   		if(checkcount>3){
+		   			FinalResults.remove(tempRes);
+		   		FinalResults.remove(origRes);
+		   		}
+		   		}
 }
 	}
 
@@ -160,7 +165,9 @@ for(int q=0;q<FinalResults.size();q++){
     		result1=new int[5];
     		result1=(int[]) FinalResults.get(a);
     		
-    		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+result1[5]+" "+result1[6]+"  Result: "+(a+1)); 
+    		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+"  Result: "+(a+1)); 
+    	if(est>5)
+    		System.out.println(result1[5]+" "+result1[6]);
     	}
     }
     
