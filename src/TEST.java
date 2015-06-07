@@ -28,13 +28,13 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	b=numSize[1];
     	c=numSize[2];
     	d=numSize[3];
-    	e=numSize[4];
+//    	e=numSize[4];
     	
     	A=new int[a];
     	B=new int[b];
     	C=new int[c];
     	D=new int[d];
-    	E=new int[e];
+//    	E=new int[e];
     	if(est>5){
     	f=numSize[5];
     	g=numSize[6];
@@ -64,11 +64,11 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	D[p]=Integer.parseInt(num);
     	finalArrayList.add(Integer.parseInt(num));
     }
-    for (int p= 0; p <e; p++){
-    	String num=	JOptionPane.showInputDialog("Enter FAV num for E "+(p+1));
-    	E[p]=Integer.parseInt(num);
-    	finalArrayList.add(Integer.parseInt(num));
-    }
+//    for (int p= 0; p <e; p++){
+//    	String num=	JOptionPane.showInputDialog("Enter FAV num for E "+(p+1));
+//    	E[p]=Integer.parseInt(num);
+//    	finalArrayList.add(Integer.parseInt(num));
+//    }
     
     if(est>5){
     for (int p= 0; p <f; p++){
@@ -111,14 +111,14 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	for(j=0;j<b;j++){
     		for(k=0;k<c;k++){
     			for(l=0;l<d;l++){
-    				for(m=0;m<e;m++){
+//    				for(m=0;m<e;m++){
     					genArray=new int[est];
    					
     					genArray[0]=A[i];
     					genArray[1]=B[j];
     					genArray[2]=C[k];
     					genArray[3]=D[l];
-    					genArray[4]=E[m];
+//    					genArray[4]=E[m];
     					if(est>5){
 						for(n=0;n<f;n++){
 						for(o=0;o<g;o++){    					
@@ -127,7 +127,7 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     					} }
     					}
 				FinalResults.add(genArray);
-    				}
+//    				}
     			}
     		}
     	}
@@ -150,7 +150,7 @@ for(int q=0;q<(FinalResults.size()-1);q++){
 		    				checkcount++;
 //		   		}
 		   }
-		   		if(checkcount>3){
+		   		if(checkcount>2){
 		   			FinalResults.remove(tempRes);
 		   		FinalResults.remove(origRes);
 		   		}
@@ -165,7 +165,7 @@ for(int q=0;q<(FinalResults.size()-1);q++){
     		result1=new int[5];
     		result1=(int[]) FinalResults.get(a);
     		
-    		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+"  Result: "+(a+1)); 
+    		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+"  Result: "+(a+1)); 
     	if(est>5)
     		System.out.println(result1[5]+" "+result1[6]);
     	}
