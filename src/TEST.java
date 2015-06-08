@@ -132,7 +132,7 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     		}
     	}
     }
-    filterResults();
+//    filterResults();
     displayResult();
     }
     
@@ -150,9 +150,9 @@ for(int q=0;q<(FinalResults.size()-1);q++){
 		    				checkcount++;
 //		   		}
 		   }
-		   		if(checkcount>2){
+		   		if(checkcount>=4){
 		   			FinalResults.remove(tempRes);
-		   		FinalResults.remove(origRes);
+//		   		Fin5alResults.remove(origRes);
 		   		}
 		   		}
 }
@@ -165,7 +165,7 @@ for(int q=0;q<(FinalResults.size()-1);q++){
     		result1=new int[5];
     		result1=(int[]) FinalResults.get(a);
     		
-    		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+"  Result: "+(a+1)); 
+    		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+"  Result: "+(a+1)); 
     	if(est>5)
     		System.out.println(result1[5]+" "+result1[6]);
     	}
