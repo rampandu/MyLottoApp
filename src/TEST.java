@@ -71,7 +71,7 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	finalArrayList.add(Integer.parseInt(num));
     }
     for (int p= 0; p <g; p++){
-    	String num=	JOptionPane.showInputDialog("Enter FAV num for E "+(p+1));
+    	String num=	JOptionPane.showInputDialog("Enter FAV num for G "+(p+1));
     	G[p]=Integer.parseInt(num);
     	finalArrayList.add(Integer.parseInt(num));
     }
