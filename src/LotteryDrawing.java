@@ -37,41 +37,16 @@ import org.apache.poi.ss.usermodel.Row;
           ("How many numbers do you need to draw?");
       k = Integer.parseInt(input);
 
-//     String  input1 = JOptionPane.showInputDialog
-//          ("What is the highest number you can draw?");
-//       int n = Integer.parseInt(input1);
-       
        lucky=JOptionPane.showInputDialog("how many lucky numbers you have???");
 	 	 lky=Integer.parseInt(lucky);     
-           
-      
-//      for (int d = 0; d < lky; d++){
-//   	 String luckynum=	JOptionPane.showInputDialog("Enter your "+(d+1)+"Lukcky number of "+lky);
-//  	 	luckynumbers[d]=Integer.parseInt(luckynum);
-//   	 	
-//
-//      }
-       luckynumbers=ReadLuckyNumFromXL();
 
-       
-//      String input3 = JOptionPane.showInputDialog
-//    	          ("enter no. of recent draws");
-//    	       int draws = Integer.parseInt(input3);
+	 	 luckynumbers=ReadLuckyNumFromXL();
+
     	AllRecentResults=ReadRecentResultsFromXL();
        
-//       for(int z=0;z<draws;z++){
-//       for(int y=0;y<recentdraw.length;y++){
-//    	   String input4 = JOptionPane.showInputDialog
-//    		          ("enter recent draw result number "+(y+1)+"for draw "+(z+1));
-//    	   recentdraw[y]=Integer.parseInt(input4);
-//       }
-//       AllRecentResults.add(recentdraw);
-//       }
-                 
      getAllPossibles();
             getresult();
             displayResult();
-//            WriteFinalResultsToExcel();
           System.exit(0);
     }
     
@@ -89,16 +64,13 @@ import org.apache.poi.ss.usermodel.Row;
     	       }
     	          Arrays.sort(result);
     	       AllPossiblities.add(result);     
-    	       if(k==6)
-    	          System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+" "+result[5]+"  possible: "+res);         
-//    	       else if(k==5)
-//    	    	   System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+"  possible: "+res);         
+    	       if(k==7)
+    	          System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+" "+result[5]+" "+result[6]+"  possible: "+res);         
     	      
     	       else
     	    	   System.out.println("Please check no. of numbers to be selected");    	   
     	    	   res++;
     	      }
-		
 	}
 
 	public static void getresult(){
@@ -113,18 +85,15 @@ import org.apache.poi.ss.usermodel.Row;
     			drawFromRecent=(int[]) AllRecentResults.get(j);    			
   			 count=0;
     			for(x=0;x<k;x++){
-    				for(y=0;y<k;y++){
+    				
     					xTest=drawFromPossible[x];
-    					yTest=drawFromRecent[y];
-    				if(drawFromPossible[x]==drawFromRecent[y])	
+    					yTest=drawFromRecent[x];
+    				if(drawFromPossible[x]==drawFromRecent[x])	
     					count++;
-    				}
     			}
-    			
     			}
-    		if(count==2)
+    		if(count<7)
 				FinalResults.add(drawFromPossible);
-    		
     	}
     	    }  
     
@@ -134,8 +103,7 @@ import org.apache.poi.ss.usermodel.Row;
     	for(int a=0;a<FinalResults.size();a++){
     		drawFromFinal=new int[k];
     		drawFromFinal=(int[]) FinalResults.get(a);
-    		
-    		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a); 
+    		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+" "+drawFromFinal[6]+"  Result: "+a); 
     	}
     }
     
@@ -173,7 +141,6 @@ import org.apache.poi.ss.usermodel.Row;
  return sheetData;
             }
     
-    
     public static ArrayList<Object> ReadRecentResultsFromXL() throws Exception {
         String filename = "recentresults.xls";
    int[] sheetData;
@@ -194,7 +161,8 @@ import org.apache.poi.ss.usermodel.Row;
              while(cells.hasNext() && c<k ) {
           	Cell  cell=(HSSFCell) cells.next();
           	cell.setCellType(Cell.CELL_TYPE_NUMERIC);          	
-          	sheetData[c]=(int)cell.getNumericCellValue();
+          	sheetData[c]=((int)cell.getNumericCellValue());
+          	sheetData[c]=(sheetData[c])%10;
           	c++;
           	          }
              Arrays.sort(sheetData);
@@ -210,12 +178,8 @@ RecentResultsList.add(sheetData);
 return RecentResultsList;
       }
     
-    
     public static void WriteFinalResultsToExcel(){
-   
-    	        // TODO Auto-generated method stub
     	        String FileName = "Final-Results.xls";
-
     	        try 
     	        {
     	            FileInputStream fileInputStream3 = new FileInputStream(FileName);
@@ -252,20 +216,12 @@ return RecentResultsList;
     	                 
     	            catch (IOException e) 
     	            {
-    	                // TODO Auto-generated catch block
     	                e.printStackTrace();
     	            }
 
     	            }
     	        } catch (FileNotFoundException e) {
-    	            // TODO Auto-generated catch block
     	            e.printStackTrace();
     	        }
-    	       
     }
-
-
-    
  }
- 
- 
