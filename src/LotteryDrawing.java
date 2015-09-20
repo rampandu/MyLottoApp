@@ -76,7 +76,7 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<1000;m++){   	
+    	 for(m=0;m<300;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -113,18 +113,21 @@ import org.apache.poi.ss.usermodel.Row;
     			drawFromRecent=(int[]) AllRecentResults.get(j);    			
   			 count=0;
     			for(x=0;x<k;x++){
+    				
     				for(y=0;y<k;y++){
     					xTest=drawFromPossible[x];
     					yTest=drawFromRecent[y];
     				if(drawFromPossible[x]==drawFromRecent[y])	
     					count++;
     				}
+    				
     			}
     			
     			}
-    		if(count==2)
-				FinalResults.add(drawFromPossible);
     		
+    		if(count==1)
+				FinalResults.add(drawFromPossible);
+			drawFromPossible=new int[k];
     	}
     	    }  
     
@@ -135,7 +138,7 @@ import org.apache.poi.ss.usermodel.Row;
     		drawFromFinal=new int[k];
     		drawFromFinal=(int[]) FinalResults.get(a);
     		
-    		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a); 
+    		 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+" "+drawFromFinal[6]+"  Result: "+a); 
     	}
     }
     
@@ -263,8 +266,6 @@ return RecentResultsList;
     	        }
     	       
     }
-
-
     
  }
  
