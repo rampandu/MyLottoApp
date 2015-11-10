@@ -76,7 +76,7 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<300;m++){   	
+    	 for(m=0;m<2;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -91,8 +91,8 @@ import org.apache.poi.ss.usermodel.Row;
     	       AllPossiblities.add(result);     
     	       if(k==6)
     	          System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+" "+result[5]+"  possible: "+res);         
-//    	       else if(k==5)
-//    	    	   System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+"  possible: "+res);         
+    	       else if(k==7)
+    	    	   System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+" "+result[5]+" "+result[6]+"  possible: "+res);         
     	      
     	       else
     	    	   System.out.println("Please check no. of numbers to be selected");    	   
@@ -111,7 +111,7 @@ import org.apache.poi.ss.usermodel.Row;
     		int count=0;
     		for(int j=0;j<AllRecentResults.size();j++){
     			drawFromRecent=(int[]) AllRecentResults.get(j);    			
-  			 count=0;
+  			
     			for(x=0;x<k;x++){
     				
     				for(y=0;y<k;y++){
@@ -125,7 +125,7 @@ import org.apache.poi.ss.usermodel.Row;
     			
     			}
     		
-    		if(count==1)
+    		if(count==2)
 				FinalResults.add(drawFromPossible);
 			drawFromPossible=new int[k];
     	}
