@@ -70,13 +70,14 @@ import org.apache.poi.ss.usermodel.Row;
                  
      getAllPossibles();
             getresult();
+            filterResults();
             displayResult();
 //            WriteFinalResultsToExcel();
           System.exit(0);
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<100;m++){   	
+    	 for(m=0;m<1000;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -125,13 +126,15 @@ import org.apache.poi.ss.usermodel.Row;
     			
     			}
     		
-    		if(count<=0)
+    		if(count<=2)
 				FinalResults.add(drawFromPossible);
 			drawFromPossible=new int[k];
     	}
     	    }  
     
     public static void displayResult(){
+//    	filterResults();
+    	
     	System.out.println("\n The Final Results are: \n");
     	int[] drawFromFinal=new int[k];
     	for(int a=0;a<FinalResults.size();a++){
@@ -146,7 +149,24 @@ import org.apache.poi.ss.usermodel.Row;
     	}
     }
     
-    public static int[] ReadLuckyNumFromXL() throws Exception {
+    private static void filterResults() {
+    	int[] draw=new int[k];
+    	for(int a=0;a<FinalResults.size();a++){
+    		draw=new int[k];
+    		draw=(int[]) FinalResults.get(a);
+    		int evenCount=0,oddCount=0;
+    		for(int b=0;b<k;b++){
+    			if(draw[b]%2==0)
+    				evenCount++;
+    			else oddCount++;
+    		}
+    	if(evenCount!=4)
+    		FinalResults.remove(a);
+    	}
+		
+	}
+
+	public static int[] ReadLuckyNumFromXL() throws Exception {
               String filename = "luckynumbers.xls";
          int[] sheetData = new int[lky];
          FileInputStream fis = null;
