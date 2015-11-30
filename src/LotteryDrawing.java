@@ -22,6 +22,7 @@ import org.apache.poi.ss.usermodel.Row;
 	static ArrayList<Object> AllPossiblities=new ArrayList<>();
      static ArrayList<Object> AllRecentResults=new ArrayList<>();
      static ArrayList<Object> FinalResults=new ArrayList<>();
+     static ArrayList<Object> FinalResultsCopy=new ArrayList<>();
      static int k;
      static int res=0;
      static int lky;
@@ -77,13 +78,13 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<1000;m++){   	
+    	 for(m=0;m<200;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
     	    	 result=new int[k];
     	      for (int i = 0; i < k; i++){
-    	          int r = (int)(Math.random() * lky);
+    	          int r = (int)(Math.random() * lky);    	             
     	          result[i] = numbersCopy[r];
     	          numbersCopy[r] = numbersCopy[lky - 1];
     	          lky--;          
@@ -111,6 +112,7 @@ import org.apache.poi.ss.usermodel.Row;
     		drawFromPossible=(int[]) AllPossiblities.get(i);
     		int count=0;
     		for(int j=0;j<AllRecentResults.size();j++){
+    			
     			drawFromRecent=(int[]) AllRecentResults.get(j);    			
   			
     			for(x=0;x<k;x++){
@@ -126,9 +128,10 @@ import org.apache.poi.ss.usermodel.Row;
     			
     			}
     		
-    		if(count<=2)
+    		if(count<=4)
 				FinalResults.add(drawFromPossible);
 			drawFromPossible=new int[k];
+			
     	}
     	    }  
     
@@ -156,15 +159,44 @@ import org.apache.poi.ss.usermodel.Row;
     		draw=(int[]) FinalResults.get(a);
     		int evenCount=0,oddCount=0;
     		for(int b=0;b<k;b++){
-    			if(draw[b]%2==0)
+    			if((draw[b]%2)==0)
     				evenCount++;
     			else oddCount++;
     		}
-    	if(evenCount!=4)
+    	if(evenCount>3)
     		FinalResults.remove(a);
     	}
+    	filterRepeatedNums();
 		
 	}
+
+	private static void filterRepeatedNums() {
+		int[] draw1=new int[k];
+		int[] draw2=new int[k];
+		int x,y;
+    	
+		for(int s=0;s<FinalResults.size()-1;s++){
+			draw1=(int[])FinalResults.get(s);
+			int count=0;
+			for(int p=1;p<FinalResults.size();p++){	
+				draw2=(int[])FinalResults.get(p);
+			
+			for(x=0;x<k;x++){
+				
+				for(y=0;y<k;y++){
+					if(draw1[x]==draw2[y])	
+					count++;
+				}
+				
+			}
+			if(count>=3)
+				FinalResults.remove(p);
+				
+		}	
+			}
+		}
+		
+	
 
 	public static int[] ReadLuckyNumFromXL() throws Exception {
               String filename = "luckynumbers.xls";
