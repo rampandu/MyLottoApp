@@ -23,6 +23,7 @@ import org.apache.poi.ss.usermodel.Row;
      static ArrayList<Object> AllRecentResults=new ArrayList<>();
      static ArrayList<Object> FinalResults=new ArrayList<>();
      static ArrayList<Object> FinalResultsCopy=new ArrayList<>();
+     static ArrayList<Object> FilteredResults=new ArrayList<>();
      static int k;
      static int res=0;
      static int lky;
@@ -71,14 +72,15 @@ import org.apache.poi.ss.usermodel.Row;
                  
      getAllPossibles();
             getresult();
-            filterResults();
+//            filterResults();   //temp
+        	filterRepeatedNums();
             displayResult();
 //            WriteFinalResultsToExcel();
           System.exit(0);
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<200;m++){   	
+    	 for(m=0;m<1000;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -128,7 +130,7 @@ import org.apache.poi.ss.usermodel.Row;
     			
     			}
     		
-    		if(count<=4)
+    		if(count<=5)
 				FinalResults.add(drawFromPossible);
 			drawFromPossible=new int[k];
 			
@@ -140,9 +142,9 @@ import org.apache.poi.ss.usermodel.Row;
     	
     	System.out.println("\n The Final Results are: \n");
     	int[] drawFromFinal=new int[k];
-    	for(int a=0;a<FinalResults.size();a++){
+    	for(int a=0;a<FilteredResults.size();a++){
     		drawFromFinal=new int[k];
-    		drawFromFinal=(int[]) FinalResults.get(a);
+    		drawFromFinal=(int[]) FilteredResults.get(a);
     		
     		if(k==6)
   	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);         
@@ -154,19 +156,22 @@ import org.apache.poi.ss.usermodel.Row;
     
     private static void filterResults() {
     	int[] draw=new int[k];
-    	for(int a=0;a<FinalResults.size();a++){
-    		draw=new int[k];
-    		draw=(int[]) FinalResults.get(a);
+    	int a;
+    	for(a=0;a<FinalResults.size();a++){
     		int evenCount=0,oddCount=0;
+//    		draw=new int[k];
+    		draw=(int[]) FinalResults.get(a);
+    		
     		for(int b=0;b<k;b++){
-    			if((draw[b]%2)==0)
+    			if((draw[b] % 2)==0)
     				evenCount++;
     			else oddCount++;
     		}
-    	if(evenCount>3)
+    	if(evenCount<3 || evenCount>5 || oddCount<3 || oddCount>4)
     		FinalResults.remove(a);
+    
     	}
-    	filterRepeatedNums();
+  
 		
 	}
 
@@ -174,23 +179,31 @@ import org.apache.poi.ss.usermodel.Row;
 		int[] draw1=new int[k];
 		int[] draw2=new int[k];
 		int x,y;
-    	
+    	int count;
 		for(int s=0;s<FinalResults.size()-1;s++){
 			draw1=(int[])FinalResults.get(s);
-			int count=0;
-			for(int p=1;p<FinalResults.size();p++){	
-				draw2=(int[])FinalResults.get(p);
 			
-			for(x=0;x<k;x++){
-				
+			for(int p=s+1;p<FinalResults.size();p++){	
+				draw2=(int[])FinalResults.get(p);
+				 count=0;
+				 if(s!=(p-1)){
+			for(x=0;x<k;x++){				
 				for(y=0;y<k;y++){
-					if(draw1[x]==draw2[y])	
-					count++;
+					System.out.println(draw1[x]+" "+draw2[y]);
+					if(draw1[x]==draw2[y]){
+						System.out.println("true");
+						count++;
+					}
+					
 				}
 				
 			}
-			if(count>=3)
-				FinalResults.remove(p);
+			if(count==0 && !FilteredResults.contains(draw1)){
+				FilteredResults.add(draw1);
+//				FinalResults.remove(p);
+			}
+				 }
+			
 				
 		}	
 			}
