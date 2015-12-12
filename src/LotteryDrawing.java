@@ -80,7 +80,7 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<5000;m++){   	//700
+    	 for(m=0;m<700;m++){   	//700
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -130,7 +130,7 @@ import org.apache.poi.ss.usermodel.Row;
     			
     			}
     		
-    		if(count<=4)
+    		if(count<=3)   //count<=4
 				FinalResults.add(drawFromPossible);
 			drawFromPossible=new int[k];
 			
