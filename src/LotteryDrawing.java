@@ -80,7 +80,7 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<700;m++){   	
+    	 for(m=0;m<5000;m++){   	//700
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -183,7 +183,7 @@ import org.apache.poi.ss.usermodel.Row;
 		for(int s=0;s<FinalResults.size()-1;s++){
 			draw1=(int[])FinalResults.get(s);
 			
-			for(int p=s+1;p<FinalResults.size();p++){	
+			for(int p=1;p<FinalResults.size();p++){	//p=s+1*
 				draw2=(int[])FinalResults.get(p);
 				 count=0;
 				 if(s!=(p-1)){
@@ -198,7 +198,7 @@ import org.apache.poi.ss.usermodel.Row;
 				}
 				
 			}
-			if(count<=3 && !FilteredResults.contains(draw1)){
+			if(count<=4 && !FilteredResults.contains(draw1)){   //count<=3
 				FilteredResults.add(draw1);
 //				FinalResults.remove(p);
 			}
