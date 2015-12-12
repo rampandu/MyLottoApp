@@ -72,7 +72,7 @@ import org.apache.poi.ss.usermodel.Row;
                  
      getAllPossibles();
             getresult();
-//            filterResults();   //temp
+            filterResults();   //temp
         	filterRepeatedNums();
             displayResult();
 //            WriteFinalResultsToExcel();
@@ -80,7 +80,7 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<1000;m++){   	
+    	 for(m=0;m<700;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -130,7 +130,7 @@ import org.apache.poi.ss.usermodel.Row;
     			
     			}
     		
-    		if(count<=5)
+    		if(count<=4)
 				FinalResults.add(drawFromPossible);
 			drawFromPossible=new int[k];
 			
@@ -189,16 +189,16 @@ import org.apache.poi.ss.usermodel.Row;
 				 if(s!=(p-1)){
 			for(x=0;x<k;x++){				
 				for(y=0;y<k;y++){
-					System.out.println(draw1[x]+" "+draw2[y]);
+//					System.out.println(draw1[x]+" "+draw2[y]);
 					if(draw1[x]==draw2[y]){
-						System.out.println("true");
+//						System.out.println("true");
 						count++;
 					}
 					
 				}
 				
 			}
-			if(count==0 && !FilteredResults.contains(draw1)){
+			if(count<=3 && !FilteredResults.contains(draw1)){
 				FilteredResults.add(draw1);
 //				FinalResults.remove(p);
 			}
