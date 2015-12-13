@@ -72,7 +72,7 @@ import org.apache.poi.ss.usermodel.Row;
                  
      getAllPossibles();
             getresult();
-            filterResults();   //temp
+//            filterResults();   //temp
         	filterRepeatedNums();
             displayResult();
 //            WriteFinalResultsToExcel();
@@ -80,7 +80,7 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<700;m++){   	    //700
+    	 for(m=0;m<7000;m++){   	    //700
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
