@@ -73,7 +73,7 @@ import org.apache.poi.ss.usermodel.Row;
      getAllPossibles();
             getresult();
             filterResults();   //temp
-        	filterRepeatedNums();
+//        	filterRepeatedNums();
             displayResult();
 //            WriteFinalResultsToExcel();
           System.exit(0);
@@ -142,9 +142,9 @@ import org.apache.poi.ss.usermodel.Row;
     	
     	System.out.println("\n The Final Results are: \n");
     	int[] drawFromFinal=new int[k];
-    	for(int a=0;a<FilteredResults.size();a++){
+    	for(int a=0;a<FinalResults.size();a++){
     		drawFromFinal=new int[k];
-    		drawFromFinal=(int[]) FilteredResults.get(a);
+    		drawFromFinal=(int[]) FinalResults.get(a);
     		
     		if(k==6)
   	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);         
