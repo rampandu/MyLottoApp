@@ -73,7 +73,7 @@ import org.apache.poi.ss.usermodel.Row;
      getAllPossibles();
             getresult();
             filterResults();   //temp
-        	filterRepeatedNums();
+        	 filterRepeatedNums();
             displayResult();
 //            WriteFinalResultsToExcel();
           System.exit(0);
@@ -159,7 +159,7 @@ import org.apache.poi.ss.usermodel.Row;
     	int a;
     	for(a=0;a<FinalResults.size();a++){
     		int evenCount=0,oddCount=0;
-//    		draw=new int[k];
+    		draw=new int[k];
     		draw=(int[]) FinalResults.get(a);
     		
     		for(int b=0;b<k;b++){
@@ -183,7 +183,7 @@ import org.apache.poi.ss.usermodel.Row;
 		for(int s=0;s<FinalResults.size()-1;s++){
 			draw1=(int[])FinalResults.get(s);
 			
-			for(int p=1;p<FinalResults.size();p++){	//p=s+1*
+			for(int p=s+1;p<FinalResults.size();p++){	//p=s+1*
 				draw2=(int[])FinalResults.get(p);
 				 count=0;
 				 if(s!=(p-1)){
@@ -198,7 +198,7 @@ import org.apache.poi.ss.usermodel.Row;
 				}
 				
 			}
-			if(count<=4 && !FilteredResults.contains(draw1)){   //count<=3
+			if(count<=3 && !FilteredResults.contains(draw1)){   //count<=3
 				FilteredResults.add(draw1);
 //				FinalResults.remove(p);
 			}
