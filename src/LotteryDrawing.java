@@ -80,7 +80,7 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<5000;m++){   	//700
+    	 for(m=0;m<700;m++){   	//700
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -167,9 +167,10 @@ import org.apache.poi.ss.usermodel.Row;
     				evenCount++;
     			else oddCount++;
     		}
-    	if(evenCount<3 || evenCount>5 || oddCount<3 || oddCount>4)
+    	if(evenCount>3 || oddCount<4){
+//    	if(evenCount>2)
     		FinalResults.remove(a);
-    
+    	}
     	}
   
 		
