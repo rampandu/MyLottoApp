@@ -72,7 +72,7 @@ import org.apache.poi.ss.usermodel.Row;
                  
      getAllPossibles();
             getresult();
-//            filterResults();   //temp
+            filterResults();   //temp
         	filterRepeatedNums();
             displayResult();
 //            WriteFinalResultsToExcel();
@@ -80,7 +80,7 @@ import org.apache.poi.ss.usermodel.Row;
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<7000;m++){   	    //700
+    	 for(m=0;m<700;m++){   	    //700
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -142,9 +142,9 @@ import org.apache.poi.ss.usermodel.Row;
     	
     	System.out.println("\n The Final Results are: \n");
     	int[] drawFromFinal=new int[k];
-    	for(int a=0;a<FilteredResults.size();a++){
+    	for(int a=0;a<FinalResults.size();a++){
     		drawFromFinal=new int[k];
-    		drawFromFinal=(int[]) FilteredResults.get(a);
+    		drawFromFinal=(int[]) FinalResults.get(a);
     		
     		if(k==6)
   	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);         
@@ -167,8 +167,10 @@ import org.apache.poi.ss.usermodel.Row;
     				evenCount++;
     			else oddCount++;
     		}
-    	if(evenCount<3 || evenCount>5 || oddCount<3 || oddCount>4)
+    	if(evenCount>3 || oddCount<4)
     		FinalResults.remove(a);
+//    	else
+//    		FilteredResults.add(draw);
     
     	}
   
