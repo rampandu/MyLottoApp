@@ -73,14 +73,29 @@ import org.apache.poi.ss.usermodel.Row;
      getAllPossibles();
             getresult();
             filterResults();   //temp
-//        	filterRepeatedNums();
+            filterResults();
+            filterResults();
+            filterResults();
+            filterResults();
+            filterResults();
+            filterResults();
+            filterResults();
+            filterResults();
+            filterResults();
+            filterResults();
+        	filterRepeatedNums();
+        	filterRepeatedNums();
+        	filterRepeatedNums();
+        	filterRepeatedNums();
+        	filterRepeatedNums();
+        	filterRepeatedNums();
             displayResult();
 //            WriteFinalResultsToExcel();
           System.exit(0);
     }
     
     private static void getAllPossibles() {
-    	 for(m=0;m<5000;m++){   	//700
+    	 for(m=0;m<300;m++){   	//700
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -130,7 +145,7 @@ import org.apache.poi.ss.usermodel.Row;
     			
     			}
     		
-    		if(count<=4)
+    		if(count<=4)  //<=4
 				FinalResults.add(drawFromPossible);
 			drawFromPossible=new int[k];
 			
@@ -138,13 +153,11 @@ import org.apache.poi.ss.usermodel.Row;
     	    }  
     
     public static void displayResult(){
-//    	filterResults();
-    	
     	System.out.println("\n The Final Results are: \n");
     	int[] drawFromFinal=new int[k];
-    	for(int a=0;a<FinalResults.size();a++){
+    	for(int a=0;a<FilteredResults.size();a++){
     		drawFromFinal=new int[k];
-    		drawFromFinal=(int[]) FinalResults.get(a);
+    		drawFromFinal=(int[]) FilteredResults.get(a);
     		
     		if(k==6)
   	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);         
@@ -158,16 +171,17 @@ import org.apache.poi.ss.usermodel.Row;
     	int[] draw=new int[k];
     	int a;
     	for(a=0;a<FinalResults.size();a++){
-    		int evenCount=0,oddCount=0;
+    		int evenCount,oddCount;
 //    		draw=new int[k];
     		draw=(int[]) FinalResults.get(a);
-    		
+    		evenCount=0;
+    		oddCount=0;
     		for(int b=0;b<k;b++){
     			if((draw[b] % 2)==0)
     				evenCount++;
     			else oddCount++;
     		}
-    	if(evenCount<3 || evenCount>5 || oddCount<3 || oddCount>4)
+    	if(evenCount>2 || oddCount<5)
     		FinalResults.remove(a);
     
     	}
@@ -183,7 +197,7 @@ import org.apache.poi.ss.usermodel.Row;
 		for(int s=0;s<FinalResults.size()-1;s++){
 			draw1=(int[])FinalResults.get(s);
 			
-			for(int p=1;p<FinalResults.size();p++){	//p=s+1*
+			for(int p=s+1;p<FinalResults.size();p++){	//p=s+1*
 				draw2=(int[])FinalResults.get(p);
 				 count=0;
 				 if(s!=(p-1)){
@@ -198,7 +212,7 @@ import org.apache.poi.ss.usermodel.Row;
 				}
 				
 			}
-			if(count<=4 && !FilteredResults.contains(draw1)){   //count<=3
+			if(count<=3 && !FilteredResults.contains(draw1)){   //count<=3
 				FilteredResults.add(draw1);
 //				FinalResults.remove(p);
 			}
