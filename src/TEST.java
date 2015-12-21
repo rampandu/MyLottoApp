@@ -29,14 +29,16 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	c=numSize[2];
     	d=numSize[3];
     	e=numSize[4];
+    	f=numSize[5];
+    	g=numSize[6];
     	
     	A=new int[a];
     	B=new int[b];
     	C=new int[c];
     	D=new int[d];
-    	E=new int[e];
-    	f=numSize[5];
+    	E=new int[e];    	
     	F=new int[f];
+    	G=new int[g];
     	
   
  // READING VALUES FOR ALL ARRAYS
@@ -71,6 +73,12 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	F[p]=Integer.parseInt(num);
     	finalArrayList.add(Integer.parseInt(num));
     }
+    
+    for (int p= 0; p <g; p++){
+    	String num=	JOptionPane.showInputDialog("Enter FAV num for G "+(p+1));
+    	G[p]=Integer.parseInt(num);
+    	finalArrayList.add(Integer.parseInt(num));
+    }
         
     // CONVERT ARRAYLIST TO ARRAY
    Object[] fullArray=finalArrayList.toArray();
@@ -94,7 +102,7 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	System.out.println(convertedArray[g]+"\t");
    
     // GENERATING FINAL NUMS COMBINATIONS        
-    int i,j,k,l,m,n,o;
+    int i,j,k,l,m,n,q;
     int[] genArray=new int[est];
     for(i=0;i<a;i++){
     	for(j=0;j<b;j++){
@@ -102,6 +110,7 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     			for(l=0;l<d;l++){
     				for(m=0;m<e;m++){
     					for(n=0;n<f;n++){
+    						for(q=0;q<g;q++){
     					genArray=new int[est];
    					
     					genArray[0]=A[i];
@@ -110,9 +119,10 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     					genArray[3]=D[l];
     					genArray[4]=E[m];						
     					genArray[5]=F[n];
+    					genArray[6]=G[q];
     					FinalResults.add(genArray);
     					 }
-				
+    					}
     				}
     			}
     		}
@@ -132,13 +142,13 @@ for(int q=0;q<(FinalResults.size()-1);q++){
 		int	checkcount=0,h,l;
 		   		for(h=0;h<origRes.length;h++){
 		   		for(l=0;l<tempRes.length;l++){
-		    			if(origRes[h]==tempRes[h])
+		    			if(origRes[h]==tempRes[l])
 		    				checkcount++;
 		   		}
 		   }
-		   		if(checkcount>=3){
+		   		if(checkcount>=4){
 		   			FinalResults.remove(tempRes);
-		   		FinalResults.remove(origRes);
+//		   		FinalResults.remove(origRes);
 		   		}
 		   		}
 }
@@ -148,10 +158,12 @@ for(int q=0;q<(FinalResults.size()-1);q++){
     	System.out.println("\n The Final Results are: \n");
     	int[] result1=new int[est];
     	for(int a=0;a<FinalResults.size();a++){
-    		result1=new int[5];
+    		result1=new int[est];
     		result1=(int[]) FinalResults.get(a);
-    		
+    		if(est==6)
     		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+result1[5]+" "+"  Result: "+(a+1)); 
+    		else if(est==7)
+    		System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+result1[5]+" "+result1[6]+"  Result: "+(a+1)); 
     	}
     }
     
