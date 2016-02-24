@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 {
      static ArrayList<Object> FinalResults=new ArrayList<>();
 static ArrayList<Integer> finalArrayList=new ArrayList<>();
-	 static int[] A,B,C,D,E,F,G;
-	static int a,b,c,d,e,f,g;
+	 static int[] A,B,C,D,E,F,G,H,I;
+	static int a,b,c,d,e,f,g,h,i;
 	static int est;
     public static void main(String[] args) throws Exception
     {
@@ -31,6 +31,8 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	e=numSize[4];
     	f=numSize[5];
     	g=numSize[6];
+    	h=numSize[7];
+    	i=numSize[8];
     	
     	A=new int[a];
     	B=new int[b];
@@ -39,6 +41,8 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	E=new int[e];    	
     	F=new int[f];
     	G=new int[g];
+    	H=new int[h];
+    	I=new int[i];
     	
   
  // READING VALUES FOR ALL ARRAYS
@@ -79,6 +83,18 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	G[p]=Integer.parseInt(num);
     	finalArrayList.add(Integer.parseInt(num));
     }
+    
+    for (int p= 0; p <h; p++){
+    	String num=	JOptionPane.showInputDialog("Enter FAV num for H "+(p+1));
+    	H[p]=Integer.parseInt(num);
+    	finalArrayList.add(Integer.parseInt(num));
+    }
+    
+    for (int p= 0; p <i; p++){
+    	String num=	JOptionPane.showInputDialog("Enter FAV num for I "+(p+1));
+    	I[p]=Integer.parseInt(num);
+    	finalArrayList.add(Integer.parseInt(num));
+    }
         
     // CONVERT ARRAYLIST TO ARRAY
    Object[] fullArray=finalArrayList.toArray();
@@ -102,7 +118,7 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	System.out.println(convertedArray[g]+"\t");
    
     // GENERATING FINAL NUMS COMBINATIONS        
-    int i,j,k,l,m,n,q;
+    int i,j,k,l,m,n,q,r,t;
     int[] genArray=new int[est];
     for(i=0;i<a;i++){
     	for(j=0;j<b;j++){
@@ -111,6 +127,8 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     				for(m=0;m<e;m++){
     					for(n=0;n<f;n++){
     						for(q=0;q<g;q++){
+    							for(r=0;r<h;r++){
+    	    						for(t=0;t<i;t++){
     					genArray=new int[est];
    					
     					genArray[0]=A[i];
@@ -120,7 +138,11 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     					genArray[4]=E[m];						
     					genArray[5]=F[n];
     					genArray[6]=G[q];
+    					genArray[7]=H[r];
+    					genArray[8]=I[t];
     					FinalResults.add(genArray);
+    	    						}
+    	    						}
     					 }
     					}
     				}
@@ -146,7 +168,7 @@ for(int q=0;q<(FinalResults.size()-1);q++){
 		    				checkcount++;
 		   		}
 		   }
-		   		if(checkcount>=4){
+		   		if(checkcount>=3){   //4
 		   			FinalResults.remove(tempRes);
 //		   		FinalResults.remove(origRes);
 		   		}
@@ -163,7 +185,10 @@ for(int q=0;q<(FinalResults.size()-1);q++){
     		if(est==6)
     		 System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+result1[5]+" "+"  Result: "+(a+1)); 
     		else if(est==7)
-    		System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+result1[5]+" "+result1[6]+"  Result: "+(a+1)); 
+    		System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+result1[5]+" "+result1[6]+"  Result: "+(a+1));
+    		
+    		else if(est==9)
+        		System.out.println(result1[0]+" "+result1[1]+" "+result1[2]+" "+result1[3]+" "+result1[4]+" "+result1[5]+" "+result1[6]+" "+result1[7]+" "+result1[8]+" Result: "+(a+1));
     	}
     }
     
