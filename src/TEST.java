@@ -146,7 +146,7 @@ for(int q=0;q<(FinalResults.size()-1);q++){
 		    				checkcount++;
 		   		}
 		   }
-		   		if(checkcount>=4){
+		   		if(checkcount>=3){   //4
 		   			FinalResults.remove(tempRes);
 //		   		FinalResults.remove(origRes);
 		   		}
