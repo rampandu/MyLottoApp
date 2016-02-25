@@ -105,13 +105,15 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
   
     // SORTING ALL ARRAYS
    Arrays.sort(convertedArray);
-//    Arrays.sort(A);
-//    Arrays.sort(B);
-//    Arrays.sort(C);
-//    Arrays.sort(D);
-//    Arrays.sort(E);
-//    Arrays.sort(F);
-//    Arrays.sort(G);
+    Arrays.sort(A);
+    Arrays.sort(B);
+    Arrays.sort(C);
+    Arrays.sort(D);
+    Arrays.sort(E);
+    Arrays.sort(F);
+    Arrays.sort(G);
+Arrays.sort(H);
+Arrays.sort(I);
     
     // PRINT ARRAY
     for(int g=0;g<convertedArray.length;g++)
@@ -168,9 +170,9 @@ for(int q=0;q<(FinalResults.size()-1);q++){
 		    				checkcount++;
 		   		}
 		   }
-		   		if(checkcount>=3){   //4
+		   		if(checkcount>=4){   //4
 		   			FinalResults.remove(tempRes);
-//		   		FinalResults.remove(origRes);
+//		   		FinalResults.remove(origRes);  // must be commented out
 		   		}
 		   		}
 }
