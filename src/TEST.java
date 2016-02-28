@@ -120,9 +120,9 @@ Arrays.sort(I);
     	System.out.println(convertedArray[g]+"\t");
    
     // GENERATING FINAL NUMS COMBINATIONS        
-    int i,j,k,l,m,n,q,r,t;
+    int s,j,k,l,m,n,q,r,t;
     int[] genArray=new int[est];
-    for(i=0;i<a;i++){
+    for(s=0;s<a;s++){
     	for(j=0;j<b;j++){
     		for(k=0;k<c;k++){
     			for(l=0;l<d;l++){
@@ -133,7 +133,7 @@ Arrays.sort(I);
     	    						for(t=0;t<i;t++){
     					genArray=new int[est];
    					
-    					genArray[0]=A[i];
+    					genArray[0]=A[s];
     					genArray[1]=B[j];
     					genArray[2]=C[k];
     					genArray[3]=D[l];
@@ -170,10 +170,10 @@ for(int q=0;q<(FinalResults.size()-1);q++){
 		    				checkcount++;
 		   		}
 		   }
-		   		if(checkcount>=4){   //4
+		   		if(checkcount>=3){   //4
 		   			FinalResults.remove(tempRes);
-//		   		FinalResults.remove(origRes);  // must be commented out
 		   		}
+		   		checkcount=0;
 		   		}
 }
 	}
