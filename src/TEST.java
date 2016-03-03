@@ -80,7 +80,7 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     	finalArrayList.add(Integer.parseInt(num));
     }
         
-    // CONVERT ARRAYLIST TO ARRAY
+    // CONVERT ARRAYLIST TO ARRA
    Object[] fullArray=finalArrayList.toArray();
    int[] convertedArray=new int[fullArray.length];
    for(int temp=0;temp<fullArray.length;temp++){
@@ -146,7 +146,7 @@ for(int q=0;q<(FinalResults.size()-1);q++){
 		    				checkcount++;
 		   		}
 		   }
-		   		if(checkcount>=3){   //4
+		   		if(checkcount>=4){   //4
 		   			FinalResults.remove(tempRes);
 //		   		FinalResults.remove(origRes);
 		   		}
