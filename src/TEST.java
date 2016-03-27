@@ -128,7 +128,7 @@ static ArrayList<Integer> finalArrayList=new ArrayList<>();
     		}
     	}
     }
-    filterResults();
+//    filterResults();
     displayResult();
     }
     
