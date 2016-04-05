@@ -30,7 +30,6 @@ import org.apache.poi.ss.usermodel.Row;
      static int[] luckynumbers = new int[lky];
      static int[] excludenumbers;
      static int[] numbersCopy=new int[lky];
-// static    int[] recentdraw=new int[k];
      static int[] result; 
      static int m=0;  
      static String lucky,exclStr;
@@ -39,12 +38,7 @@ import org.apache.poi.ss.usermodel.Row;
     String input = JOptionPane.showInputDialog
           ("How many numbers do you need to draw?");
       k = Integer.parseInt(input);
-
-//     String  input1 = JOptionPane.showInputDialog
-//          ("What is the highest number you can draw?");
-//       int n = Integer.parseInt(input1);
-       
-       lucky=JOptionPane.showInputDialog("how many LUCKY numbers you have???");
+      lucky=JOptionPane.showInputDialog("how many LUCKY numbers you have???");
 	 	 lky=Integer.parseInt(lucky);  
 	 	 
 	 	 exclStr=JOptionPane.showInputDialog("how many EXCLUDE numbers you have???");
@@ -59,50 +53,54 @@ import org.apache.poi.ss.usermodel.Row;
   	 	}
       
        luckynumbers=ReadLuckyNumFromXL();
-
-       
-//      String input3 = JOptionPane.showInputDialog
-//    	          ("enter no. of recent draws");
-//    	       int draws = Integer.parseInt(input3);
-    	AllRecentResults=ReadRecentResultsFromXL();
-       
-//       for(int z=0;z<draws;z++){
-//       for(int y=0;y<recentdraw.length;y++){
-//    	   String input4 = JOptionPane.showInputDialog
-//    		          ("enter recent draw result number "+(y+1)+"for draw "+(z+1));
-//    	   recentdraw[y]=Integer.parseInt(input4);
-//       }
-//       AllRecentResults.add(recentdraw);
-//       }
-                 
-     getAllPossibles();
+             getAllPossibles();
+             printAllPossibleResults();
+             
+             AllRecentResults=ReadRecentResultsFromXL();
+             printRecentResults();
+             
             getresult();
-            filterResults();   //temp
-            filterResults(); 
-            filterResults(); 
-            filterResults(); 
-            
-        	filterRepeatedNums();
-        	filterRepeatedNums();
-        	filterRepeatedNums();
-        	filterRepeatedNums();
+          printResults();
+//            filterResults();   //temp
+//            filterResults(); 
+//            filterResults(); 
+           
+//        	filterRepeatedNums();
+//        	displayResult(FilteredResults);
+//        	filterRepeatedNums();
+//        	filterRepeatedNums();
         	
-        	filterExcludeNums();
-        	filterExcludeNums();
-        	filterExcludeNums();
-        	filterExcludeNums();
-        	filterExcludeNums();
-        	filterExcludeNums();
-            displayResult();
+//        	filterExcludeNums();
+//        	filterExcludeNums();
+//        	filterExcludeNums();
+//        	 getresult();
+        	System.out.println("\n FINAL RESULTS are: \n");
+            displayResult(AllPossiblities);
 //            WriteFinalResultsToExcel();
           System.exit(0);
     }
     
-    private static void filterExcludeNums() {
+    private static void printResults() {
+    	System.out.println("\n Generated RESULTS are: \n");
+    	  displayResult(AllPossiblities);		
+	}
+
+	private static void printAllPossibleResults() {
+    	System.out.println("\n All POSSIBLE Results are: \n");
+displayResult(AllPossiblities);		
+	}
+
+	private static void printRecentResults() {
+    	  System.out.println("\n The RECENT Results are: \n");
+    	displayResult(AllRecentResults);	
+	}
+
+	private static void filterExcludeNums() {
+		 System.out.println("filtering exclude nums");
     	int x,y,count;
         	int[] draw=new int[k];
-    	  	for(int s=0;s<FilteredResults.size();s++){
-			draw=(int[])FilteredResults.get(s);
+    	  	for(int s=0;s<AllPossiblities.size();s++){
+			draw=(int[])AllPossiblities.get(s);
 			count=0;
 			for(x=0;x<k;x++){				
 				for(y=0;y<excl;y++){
@@ -113,13 +111,14 @@ import org.apache.poi.ss.usermodel.Row;
 				}
     	}
 			if(count>=2)
-				FilteredResults.remove(s);
+//				FilteredResults.add(s);
+				AllPossiblities.remove(s);
     	  	}
 		
 	}
 
 	private static void getAllPossibles() {
-    	 for(m=0;m<50000;m++){   	
+    	 for(m=0;m<100;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
@@ -131,75 +130,59 @@ import org.apache.poi.ss.usermodel.Row;
     	          lky--;          
     	       }
     	          Arrays.sort(result);
-    	       AllPossiblities.add(result);     
-    	       if(k==6)
-    	          System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+" "+result[5]+"  possible: "+res);         
-    	       else if(k==7)
-    	    	   System.out.println(result[0]+" "+result[1]+" "+result[2]+" "+result[3]+" "+result[4]+" "+result[5]+" "+result[6]+"  possible: "+res);         
-    	      
-    	       else
-    	    	   System.out.println("Please check no. of numbers to be selected");    	   
-    	    	   res++;
-    	      }
+    	       AllPossiblities.add(result);   
+    	        }
 		
 	}
 
 	public static void getresult(){
+		System.out.println("filtering recent results");
    	int[] drawFromPossible=new int[k];
     	int[] drawFromRecent=new int[k];
-    	int x,y;
-    	int xTest,yTest;
+    	int x,y,count;
     	for(int i=0;i<AllPossiblities.size();i++){
+    		drawFromPossible=new int[k];
     		drawFromPossible=(int[]) AllPossiblities.get(i);
-    		int count=0;
+    		
     		for(int j=0;j<AllRecentResults.size();j++){
-    			
+    			count=0;
     			drawFromRecent=(int[]) AllRecentResults.get(j);    			
   			
-    			for(x=0;x<k;x++){
-    				
+    			for(x=0;x<k;x++){    				
     				for(y=0;y<k;y++){
-    					xTest=drawFromPossible[x];
-    					yTest=drawFromRecent[y];
-    				if(drawFromPossible[x]==drawFromRecent[y])	
-    					count++;
+    				if(drawFromPossible[x]==drawFromRecent[y])
+    					count++;    				
     				}
-    				
     			}
     			
+//    			if(count>1 && count<3 && !FinalResults.contains(drawFromPossible))
+//    				FinalResults.add(drawFromPossible);
+    			if(count>=3)
+    				AllPossiblities.remove(j);
     			}
-    		
-    		if(count<=5)
-				FinalResults.add(drawFromPossible);
-			drawFromPossible=new int[k];
-			
     	}
     	    }  
     
-    public static void displayResult(){
-//    	filterResults();
-    	
-    	System.out.println("\n The Final Results are: \n");
+    	public static void displayResult(ArrayList<Object> res){
     	int[] drawFromFinal=new int[k];
-    	for(int a=0;a<FilteredResults.size();a++){
+    	for(int a=0;a<res.size();a++){
     		drawFromFinal=new int[k];
-    		drawFromFinal=(int[]) FilteredResults.get(a);
-    		
+    		drawFromFinal=(int[]) res.get(a);
     		if(k==6)
   	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);         
   	       else if(k==7)
   	    	   System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+" "+drawFromFinal[6]+"  Result: "+a); 
-    		 
     	}
     }
     
     private static void filterResults() {
+    	System.out.println("\n Filtering results EVEN-ODD\n");
     	int[] draw=new int[k];
     	int a;
-    	for(a=0;a<FinalResults.size();a++){
+    	for(a=0;a<AllPossiblities.size();a++){
     		int evenCount=0,oddCount=0;
 //    		draw=new int[k];
-    		draw=(int[]) FinalResults.get(a);
+    		draw=(int[]) AllPossiblities.get(a);
     		
     		for(int b=0;b<k;b++){
     			if((draw[b] % 2)==0)
@@ -207,41 +190,39 @@ import org.apache.poi.ss.usermodel.Row;
     			else oddCount++;
     		}
 //    	if(evenCount<3 || evenCount>5 || oddCount<3 || oddCount>4)
-    		if(oddCount<3 || oddCount>5)
-    		FinalResults.remove(a);
-    
+    		if(oddCount<4 || oddCount>5)
+    		AllPossiblities.remove(a);
     	}
-  
-		
 	}
 
 	private static void filterRepeatedNums() {
+		System.out.println("filtering REPEATED nums");
 		int[] draw1=new int[k];
 		int[] draw2=new int[k];
 		int x,y;
     	int count;
-		for(int s=0;s<FinalResults.size()-1;s++){
-			draw1=(int[])FinalResults.get(s);
-			
-			for(int p=s+1;p<FinalResults.size();p++){	
-				draw2=(int[])FinalResults.get(p);
+		for(int s=0;s<AllPossiblities.size()-1;s++){
+			draw1=(int[])AllPossiblities.get(s);
+			count=0;
+			for(int p=1;p<AllPossiblities.size();p++){	
+				draw2=(int[])AllPossiblities.get(p);
 				 count=0;
 				 if(s!=(p-1)){
 			for(x=0;x<k;x++){				
 				for(y=0;y<k;y++){
-//					System.out.println(draw1[x]+" "+draw2[y]);
 					if(draw1[x]==draw2[y]){
-//						System.out.println("true");
 						count++;
 					}
 					
 				}
 				
 			}
-			if(count<=3 && !FilteredResults.contains(draw1)){
-				FilteredResults.add(draw1);
-//				FinalResults.remove(p);
+			 
 			}
+//				 if(count<=2 && !FilteredResults.contains(draw1)){
+				 if(count>=4){
+//						FilteredResults.add(draw1);
+						AllPossiblities.remove(p);
 				 }
 			
 				
@@ -310,7 +291,9 @@ import org.apache.poi.ss.usermodel.Row;
           	c++;
           	          }
              Arrays.sort(sheetData);
+             if(RecentResultsList.size()<=4){
 RecentResultsList.add(sheetData);
+             }
       }
   } catch (IOException e) {
       e.printStackTrace();
