@@ -115,9 +115,10 @@ displayResult(AllPossiblities);
 					
 				}
     	}
-			if(count>=2)
+			if(count>=3){
 //				FilteredResults.add(s);
 				AllPossiblities.remove(s);
+			}
     	  	}
 		
 	}
