@@ -24,7 +24,11 @@ import org.apache.poi.ss.usermodel.Row;
      static ArrayList<Object> FinalResults=new ArrayList<>();
      static ArrayList<Object> FinalResultsCopy=new ArrayList<>();
      static ArrayList<Object> FilteredResults=new ArrayList<>();
-     static int k;
+     static ArrayList<Integer> finalArrayList=new ArrayList<>();
+     static int[] A,B,C,D,E,F,G;
+ 	static int a,b,c,d,e,f,g;
+
+     static int est;
      static int res=0;
      static int lky,excl;
      static int[] luckynumbers = new int[lky];
@@ -37,9 +41,9 @@ import org.apache.poi.ss.usermodel.Row;
     {
     String input = JOptionPane.showInputDialog
           ("How many numbers do you need to draw?");
-      k = Integer.parseInt(input);
-      lucky=JOptionPane.showInputDialog("how many LUCKY numbers you have???");
-	 	 lky=Integer.parseInt(lucky);  
+      est= Integer.parseInt(input);
+//      lucky=JOptionPane.showInputDialog("how many LUCKY numbers you have???");
+//	 	 lky=Integer.parseInt(lucky);  
 	 	 
 	 	 exclStr=JOptionPane.showInputDialog("how many EXCLUDE numbers you have???");
 	 	 excl=Integer.parseInt(exclStr);  
@@ -52,8 +56,9 @@ import org.apache.poi.ss.usermodel.Row;
   	 	excludenumbers[d]=Integer.parseInt(exclnum);
   	 	}
       
-       luckynumbers=ReadLuckyNumFromXL();
-             getAllPossibles();
+//       luckynumbers=ReadLuckyNumFromXL();
+//             getAllPossibles();
+       generatePossibleCombinations();
              printAllPossibleResults();
              
              AllRecentResults=ReadRecentResultsFromXL();
@@ -68,7 +73,7 @@ import org.apache.poi.ss.usermodel.Row;
 //        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
 //        	filterRepeatedNums();
-//        	filterRepeatedNums();
+        	filterRepeatedNums();
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
@@ -98,11 +103,11 @@ displayResult(AllPossiblities);
 	private static void filterExcludeNums() {
 		 System.out.println("filtering exclude nums");
     	int x,y,count;
-        	int[] draw=new int[k];
+        	int[] draw=new int[est];
     	  	for(int s=0;s<AllPossiblities.size();s++){
 			draw=(int[])AllPossiblities.get(s);
 			count=0;
-			for(x=0;x<k;x++){				
+			for(x=0;x<est;x++){				
 				for(y=0;y<excl;y++){
 					if(draw[x]==excludenumbers[y]){
 						count++;
@@ -117,13 +122,129 @@ displayResult(AllPossiblities);
 		
 	}
 
+	private static void generatePossibleCombinations() {
+		//READING ARRAY SIZES
+    	
+      	int numSize[];
+   	numSize=new int[est];
+   	for(int t=0;t<est;t++){
+     String input = JOptionPane.showInputDialog
+     ("Enter choice nums length for  "+(t+1));
+ numSize[t]= Integer.parseInt(input);}
+   	a=numSize[0];
+   	b=numSize[1];
+   	c=numSize[2];
+   	d=numSize[3];
+   	e=numSize[4];
+   	f=numSize[5];
+   	g=numSize[6];
+   	
+   	A=new int[a];
+   	B=new int[b];
+   	C=new int[c];
+   	D=new int[d];
+   	E=new int[e];    	
+   	F=new int[f];
+   	G=new int[g];
+   	
+ 
+// READING VALUES FOR ALL ARRAYS
+   for (int p= 0; p <a; p++){
+   	String num=	JOptionPane.showInputDialog("Enter FAV num for A "+(p+1));
+   	A[p]=Integer.parseInt(num);
+   	finalArrayList.add(Integer.parseInt(num));
+   }
+   for (int p= 0; p <b; p++){
+   	String num=	JOptionPane.showInputDialog("Enter FAV num for B "+(p+1));
+   	B[p]=Integer.parseInt(num);
+   	finalArrayList.add(Integer.parseInt(num));
+   }
+   for (int p= 0; p <c; p++){
+   	String num=	JOptionPane.showInputDialog("Enter FAV num for C "+(p+1));
+   	C[p]=Integer.parseInt(num);
+   	finalArrayList.add(Integer.parseInt(num));
+   }
+   for (int p= 0; p <d; p++){
+   	String num=	JOptionPane.showInputDialog("Enter FAV num for D "+(p+1));
+   	D[p]=Integer.parseInt(num);
+   	finalArrayList.add(Integer.parseInt(num));
+   }
+   for (int p= 0; p <e; p++){
+   	String num=	JOptionPane.showInputDialog("Enter FAV num for E "+(p+1));
+   	E[p]=Integer.parseInt(num);
+   	finalArrayList.add(Integer.parseInt(num));
+   }
+   
+   for (int p= 0; p <f; p++){
+   	String num=	JOptionPane.showInputDialog("Enter FAV num for F "+(p+1));
+   	F[p]=Integer.parseInt(num);
+   	finalArrayList.add(Integer.parseInt(num));
+   }
+   
+   for (int p= 0; p <g; p++){
+   	String num=	JOptionPane.showInputDialog("Enter FAV num for G "+(p+1));
+   	G[p]=Integer.parseInt(num);
+   	finalArrayList.add(Integer.parseInt(num));
+   }
+       
+   // CONVERT ARRAYLIST TO ARRA
+  Object[] fullArray=finalArrayList.toArray();
+  int[] convertedArray=new int[fullArray.length];
+  for(int temp=0;temp<fullArray.length;temp++){
+	   convertedArray[temp]=(int)fullArray[temp];
+  }
+ 
+   // SORTING ALL ARRAYS
+  Arrays.sort(convertedArray);
+//   Arrays.sort(A);
+//   Arrays.sort(B);
+//   Arrays.sort(C);
+//   Arrays.sort(D);
+//   Arrays.sort(E);
+//   Arrays.sort(F);
+//   Arrays.sort(G);
+   
+   // PRINT ARRAY
+   for(int g=0;g<convertedArray.length;g++)
+   	System.out.println(convertedArray[g]+"\t");
+  
+   // GENERATING FINAL NUMS COMBINATIONS        
+   int i,j,k,l,m,n,q;
+   int[] genArray=new int[est];
+   for(i=0;i<a;i++){
+   	for(j=0;j<b;j++){
+   		for(k=0;k<c;k++){
+   			for(l=0;l<d;l++){
+   				for(m=0;m<e;m++){
+   					for(n=0;n<f;n++){
+   						for(q=0;q<g;q++){
+   					genArray=new int[est];
+  					
+   					genArray[0]=A[i];
+   					genArray[1]=B[j];
+   					genArray[2]=C[k];
+   					genArray[3]=D[l];
+   					genArray[4]=E[m];						
+   					genArray[5]=F[n];
+   					genArray[6]=G[q];
+   					AllPossiblities.add(genArray);
+   					 }
+   					}
+   				}
+   			}
+   		}
+   	}
+   }		
+}
+
+	
 	private static void getAllPossibles() {
     	 for(m=0;m<100;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
     	 
-    	    	 result=new int[k];
-    	      for (int i = 0; i < k; i++){
+    	    	 result=new int[est];
+    	      for (int i = 0; i < est; i++){
     	          int r = (int)(Math.random() * lky);    	             
     	          result[i] = numbersCopy[r];
     	          numbersCopy[r] = numbersCopy[lky - 1];
@@ -137,19 +258,19 @@ displayResult(AllPossiblities);
 
 	public static void getresult(){
 		System.out.println("filtering recent results");
-   	int[] drawFromPossible=new int[k];
-    	int[] drawFromRecent=new int[k];
+   	int[] drawFromPossible=new int[est];
+    	int[] drawFromRecent=new int[est];
     	int x,y,count;
     	for(int i=0;i<AllPossiblities.size();i++){
-    		drawFromPossible=new int[k];
+    		drawFromPossible=new int[est];
     		drawFromPossible=(int[]) AllPossiblities.get(i);
     		
     		for(int j=0;j<AllRecentResults.size();j++){
     			count=0;
     			drawFromRecent=(int[]) AllRecentResults.get(j);    			
   			
-    			for(x=0;x<k;x++){    				
-    				for(y=0;y<k;y++){
+    			for(x=0;x<est;x++){    				
+    				for(y=0;y<est;y++){
     				if(drawFromPossible[x]==drawFromRecent[y])
     					count++;    				
     				}
@@ -157,34 +278,34 @@ displayResult(AllPossiblities);
     			
 //    			if(count>1 && count<3 && !FinalResults.contains(drawFromPossible))
 //    				FinalResults.add(drawFromPossible);
-    			if(count>=3)
+    			if(count>=2)
     				AllPossiblities.remove(j);
     			}
     	}
     	    }  
     
     	public static void displayResult(ArrayList<Object> res){
-    	int[] drawFromFinal=new int[k];
+    	int[] drawFromFinal=new int[est];
     	for(int a=0;a<res.size();a++){
-    		drawFromFinal=new int[k];
+    		drawFromFinal=new int[est];
     		drawFromFinal=(int[]) res.get(a);
-    		if(k==6)
+    		if(est==6)
   	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);         
-  	       else if(k==7)
+  	       else if(est==7)
   	    	   System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+" "+drawFromFinal[6]+"  Result: "+a); 
     	}
     }
     
     private static void filterResults() {
     	System.out.println("\n Filtering results EVEN-ODD\n");
-    	int[] draw=new int[k];
+    	int[] draw=new int[est];
     	int a;
     	for(a=0;a<AllPossiblities.size();a++){
     		int evenCount=0,oddCount=0;
 //    		draw=new int[k];
     		draw=(int[]) AllPossiblities.get(a);
     		
-    		for(int b=0;b<k;b++){
+    		for(int b=0;b<est;b++){
     			if((draw[b] % 2)==0)
     				evenCount++;
     			else oddCount++;
@@ -197,8 +318,8 @@ displayResult(AllPossiblities);
 
 	private static void filterRepeatedNums() {
 		System.out.println("filtering REPEATED nums");
-		int[] draw1=new int[k];
-		int[] draw2=new int[k];
+		int[] draw1=new int[est];
+		int[] draw2=new int[est];
 		int x,y;
     	int count;
 		for(int s=0;s<AllPossiblities.size()-1;s++){
@@ -208,8 +329,8 @@ displayResult(AllPossiblities);
 				draw2=(int[])AllPossiblities.get(p);
 				 count=0;
 				 if(s!=(p-1)){
-			for(x=0;x<k;x++){				
-				for(y=0;y<k;y++){
+			for(x=0;x<est;x++){				
+				for(y=0;y<est;y++){
 					if(draw1[x]==draw2[y]){
 						count++;
 					}
@@ -220,7 +341,7 @@ displayResult(AllPossiblities);
 			 
 			}
 //				 if(count<=2 && !FilteredResults.contains(draw1)){
-				 if(count>=5){
+				 if(count>=4){
 //						FilteredResults.add(draw1);
 						AllPossiblities.remove(p);
 				 }
@@ -279,12 +400,12 @@ displayResult(AllPossiblities);
       Iterator<Row> rows = sheet.rowIterator();
     
       while (rows.hasNext()) {
-    	  sheetData=new int[k];
+    	  sheetData=new int[est];
           HSSFRow row = (HSSFRow) rows.next();
           Iterator<Cell> cells = row.cellIterator();
            int c=0;
            
-             while(cells.hasNext() && c<k ) {
+             while(cells.hasNext() && c<est ) {
           	Cell  cell=(HSSFCell) cells.next();
           	cell.setCellType(Cell.CELL_TYPE_NUMERIC);          	
           	sheetData[c]=(int)cell.getNumericCellValue();
