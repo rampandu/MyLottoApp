@@ -72,7 +72,7 @@ import org.apache.poi.ss.usermodel.Row;
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
-//        	filterExcludeNums();
+        	filterExcludeNums();
 //        	 getresult();
         	System.out.println("\n FINAL RESULTS are: \n");
             displayResult(AllPossiblities);
@@ -220,7 +220,7 @@ displayResult(AllPossiblities);
 			 
 			}
 //				 if(count<=2 && !FilteredResults.contains(draw1)){
-				 if(count>=4){
+				 if(count>=5){
 //						FilteredResults.add(draw1);
 						AllPossiblities.remove(p);
 				 }
@@ -291,7 +291,7 @@ displayResult(AllPossiblities);
           	c++;
           	          }
              Arrays.sort(sheetData);
-             if(RecentResultsList.size()<=4){
+             if(RecentResultsList.size()<=20){
 RecentResultsList.add(sheetData);
              }
       }
