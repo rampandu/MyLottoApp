@@ -138,7 +138,6 @@ displayResult(AllPossiblities);
    	d=numSize[3];
    	e=numSize[4];
    	f=numSize[5];
-   	g=numSize[6];
    	
    	A=new int[a];
    	B=new int[b];
@@ -146,7 +145,6 @@ displayResult(AllPossiblities);
    	D=new int[d];
    	E=new int[e];    	
    	F=new int[f];
-   	G=new int[g];
    	
  
 // READING VALUES FOR ALL ARRAYS
@@ -182,12 +180,7 @@ displayResult(AllPossiblities);
    	finalArrayList.add(Integer.parseInt(num));
    }
    
-   for (int p= 0; p <g; p++){
-   	String num=	JOptionPane.showInputDialog("Enter FAV num for G "+(p+1));
-   	G[p]=Integer.parseInt(num);
-   	finalArrayList.add(Integer.parseInt(num));
-   }
-       
+         
    // CONVERT ARRAYLIST TO ARRA
   Object[] fullArray=finalArrayList.toArray();
   int[] convertedArray=new int[fullArray.length];
@@ -218,7 +211,6 @@ displayResult(AllPossiblities);
    			for(l=0;l<d;l++){
    				for(m=0;m<e;m++){
    					for(n=0;n<f;n++){
-   						for(q=0;q<g;q++){
    					genArray=new int[est];
   					
    					genArray[0]=A[i];
@@ -227,9 +219,7 @@ displayResult(AllPossiblities);
    					genArray[3]=D[l];
    					genArray[4]=E[m];						
    					genArray[5]=F[n];
-   					genArray[6]=G[q];
    					AllPossiblities.add(genArray);
-   					 }
    					}
    				}
    			}
@@ -342,7 +332,7 @@ displayResult(AllPossiblities);
 			 
 			}
 //				 if(count<=2 && !FilteredResults.contains(draw1)){
-				 if(count>=4){
+				 if(count>=3){
 //						FilteredResults.add(draw1);
 						AllPossiblities.remove(p);
 				 }
