@@ -267,7 +267,7 @@ displayResult(AllPossiblities);
     				}
     			}
     			
-    			if(count>=2)  //>=2 IMP
+    			if(count>=3)  //>=2 IMP
     				AllPossiblities.remove(j);
     			}
     	}
@@ -329,7 +329,7 @@ displayResult(AllPossiblities);
 			}
 			 
 			}
-				 if(count>=3){  //>=3 IMP
+				 if(count>=4){  //>=3 IMP
 						AllPossiblities.remove(p);
 				 }
 			
