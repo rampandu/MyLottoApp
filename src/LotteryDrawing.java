@@ -267,9 +267,7 @@ displayResult(AllPossiblities);
     				}
     			}
     			
-//    			if(count>1 && count<3 && !FinalResults.contains(drawFromPossible))
-//    				FinalResults.add(drawFromPossible);
-    			if(count>=2)
+    			if(count>=2)  //>=2 IMP
     				AllPossiblities.remove(j);
     			}
     	}
@@ -331,9 +329,7 @@ displayResult(AllPossiblities);
 			}
 			 
 			}
-//				 if(count<=2 && !FilteredResults.contains(draw1)){
-				 if(count>=3){
-//						FilteredResults.add(draw1);
+				 if(count>=3){  //>=3 IMP
 						AllPossiblities.remove(p);
 				 }
 			
