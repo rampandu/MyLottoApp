@@ -77,7 +77,7 @@ import org.apache.poi.ss.usermodel.Row;
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
-        	filterExcludeNums();
+//        	filterExcludeNums();
 //        	 getresult();
         	System.out.println("\n FINAL RESULTS are: \n");
             displayResult(AllPossiblities);
@@ -137,14 +137,12 @@ displayResult(AllPossiblities);
    	c=numSize[2];
    	d=numSize[3];
    	e=numSize[4];
-   	f=numSize[5];
    	
    	A=new int[a];
    	B=new int[b];
    	C=new int[c];
    	D=new int[d];
    	E=new int[e];    	
-   	F=new int[f];
    	
  
 // READING VALUES FOR ALL ARRAYS
@@ -174,11 +172,7 @@ displayResult(AllPossiblities);
    	finalArrayList.add(Integer.parseInt(num));
    }
    
-   for (int p= 0; p <f; p++){
-   	String num=	JOptionPane.showInputDialog("Enter FAV num for F "+(p+1));
-   	F[p]=Integer.parseInt(num);
-   	finalArrayList.add(Integer.parseInt(num));
-   }
+  
    
          
    // CONVERT ARRAYLIST TO ARRA
@@ -210,7 +204,7 @@ displayResult(AllPossiblities);
    		for(k=0;k<c;k++){
    			for(l=0;l<d;l++){
    				for(m=0;m<e;m++){
-   					for(n=0;n<f;n++){
+   					
    					genArray=new int[est];
   					
    					genArray[0]=A[i];
@@ -218,9 +212,8 @@ displayResult(AllPossiblities);
    					genArray[2]=C[k];
    					genArray[3]=D[l];
    					genArray[4]=E[m];						
-   					genArray[5]=F[n];
    					AllPossiblities.add(genArray);
-   					}
+   					
    				}
    			}
    		}
@@ -267,7 +260,7 @@ displayResult(AllPossiblities);
     				}
     			}
     			
-    			if(count>=3)  //>=2 IMP
+    			if(count>=2)  //>=2 IMP
     				AllPossiblities.remove(j);
     			}
     	}
@@ -278,8 +271,8 @@ displayResult(AllPossiblities);
     	for(int a=0;a<res.size();a++){
     		drawFromFinal=new int[est];
     		drawFromFinal=(int[]) res.get(a);
-    		if(est==6)
-  	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);         
+    		if(est==5)
+  	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+"  Result: "+a);         
   	       else if(est==7)
   	    	   System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+" "+drawFromFinal[6]+"  Result: "+a); 
     	}
@@ -329,7 +322,7 @@ displayResult(AllPossiblities);
 			}
 			 
 			}
-				 if(count>=4){  //>=3 IMP
+				 if(count>=3){  //>=3 IMP
 						AllPossiblities.remove(p);
 				 }
 			
