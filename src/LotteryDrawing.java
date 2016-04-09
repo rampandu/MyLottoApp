@@ -73,7 +73,7 @@ import org.apache.poi.ss.usermodel.Row;
 //        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
 //        	filterRepeatedNums();
-        	filterRepeatedNums();
+//        	filterRepeatedNums();
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
@@ -115,7 +115,7 @@ displayResult(AllPossiblities);
 					
 				}
     	}
-			if(count>=3){
+			if(count>3){
 //				FilteredResults.add(s);
 				AllPossiblities.remove(s);
 			}
@@ -267,7 +267,7 @@ displayResult(AllPossiblities);
     				}
     			}
     			
-    			if(count>=3)  //>=2 IMP
+    			if(count>=2)  //>=2 IMP
     				AllPossiblities.remove(j);
     			}
     	}
