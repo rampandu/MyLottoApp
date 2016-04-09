@@ -278,8 +278,10 @@ displayResult(AllPossiblities);
     	for(int a=0;a<res.size();a++){
     		drawFromFinal=new int[est];
     		drawFromFinal=(int[]) res.get(a);
+    		Arrays.sort(drawFromFinal);
     		if(est==6)
-  	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);         
+    			System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);
+//  	          System.out.println(drawFromFinal[0]%10+" "+drawFromFinal[1]%10+" "+drawFromFinal[2]%10+" "+drawFromFinal[3]%10+" "+drawFromFinal[4]%10+" "+drawFromFinal[5]%10+"  Result: "+a);         
   	       else if(est==7)
   	    	   System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+" "+drawFromFinal[6]+"  Result: "+a); 
     	}
@@ -329,7 +331,7 @@ displayResult(AllPossiblities);
 			}
 			 
 			}
-				 if(count>=3){  //>=3 IMP
+				 if(count>=4){  //>=3 IMP
 						AllPossiblities.remove(p);
 				 }
 			
