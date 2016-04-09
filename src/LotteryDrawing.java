@@ -73,7 +73,7 @@ import org.apache.poi.ss.usermodel.Row;
 //        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
 //        	filterRepeatedNums();
-        	filterRepeatedNums();
+//        	filterRepeatedNums();
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
@@ -260,7 +260,7 @@ displayResult(AllPossiblities);
     				}
     			}
     			
-    			if(count>=2)  //>=2 IMP
+    			if(count>=3)  //>=2 IMP
     				AllPossiblities.remove(j);
     			}
     	}
@@ -271,8 +271,10 @@ displayResult(AllPossiblities);
     	for(int a=0;a<res.size();a++){
     		drawFromFinal=new int[est];
     		drawFromFinal=(int[]) res.get(a);
+    		Arrays.sort(drawFromFinal);
     		if(est==5)
-  	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+"  Result: "+a);         
+    			 System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+"  Result: "+a);      
+//  	          System.out.println(drawFromFinal[0]%10+" "+drawFromFinal[1]%10+" "+drawFromFinal[2]%10+" "+drawFromFinal[3]%10+" "+drawFromFinal[4]%10+"  Result: "+a);         
   	       else if(est==7)
   	    	   System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+" "+drawFromFinal[6]+"  Result: "+a); 
     	}
