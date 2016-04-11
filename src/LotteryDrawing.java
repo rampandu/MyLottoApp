@@ -25,8 +25,8 @@ import org.apache.poi.ss.usermodel.Row;
      static ArrayList<Object> FinalResultsCopy=new ArrayList<>();
      static ArrayList<Object> FilteredResults=new ArrayList<>();
      static ArrayList<Integer> finalArrayList=new ArrayList<>();
-     static int[] A,B,C,D,E,F,G;
- 	static int a,b,c,d,e,f,g;
+     static int[] A,B,C,D,E,F,G,H,I;
+ 	static int a,b,c,d,e,f,g,h,i;
 
      static int est;
      static int res=0;
@@ -56,9 +56,10 @@ import org.apache.poi.ss.usermodel.Row;
   	 	excludenumbers[d]=Integer.parseInt(exclnum);
   	 	}
       
-//       luckynumbers=ReadLuckyNumFromXL();
-//             getAllPossibles();
-       generatePossibleCombinations();
+       readArrays();
+       generatePossibleCombinations(A,B,C,D,E,F,G);
+       generatePossibleCombinations(C,D,E,F,G,H,I);
+       generatePossibleCombinations(A,B,C,E,G,H,I);
              printAllPossibleResults();
              
              AllRecentResults=ReadRecentResultsFromXL();
@@ -70,10 +71,10 @@ import org.apache.poi.ss.usermodel.Row;
 //            filterResults(); 
 //            filterResults(); 
            
-//        	filterRepeatedNums();
-//        	displayResult(FilteredResults);
-//        	filterRepeatedNums();
         	filterRepeatedNums();
+        	filterRepeatedNums();
+        	filterRepeatedNums();
+//        	displayResult(FilteredResults);2
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
@@ -123,29 +124,34 @@ displayResult(AllPossiblities);
 		
 	}
 
-	private static void generatePossibleCombinations() {
-		readArrays();
+	private static void generatePossibleCombinations(int[] AA,int[] BB,int[] CC,int[] DD,int[] EE,int[] FF,int[] GG) {
+		
    // GENERATING FINAL NUMS COMBINATIONS        
-   int i,j,k,l,m,n,q;
+   int i2,j,k,l,m,n,q,r,s;
    int[] genArray=new int[est];
-   for(i=0;i<a;i++){
+   for(i2=0;i2<a;i2++){
    	for(j=0;j<b;j++){
    		for(k=0;k<c;k++){
    			for(l=0;l<d;l++){
    				for(m=0;m<e;m++){
    					for(n=0;n<f;n++){
    						for(q=0;q<g;q++){
+   							for(r=0;r<h;r++){
+   								for(s=0;s<i;s++){
+   							
    					genArray=new int[est];
   					
-   					genArray[0]=A[i];
-   					genArray[1]=B[j];
-   					genArray[2]=C[k];
-   					genArray[3]=D[l];
-   					genArray[4]=E[m];						
-   					genArray[5]=F[n];
-   					genArray[6]=G[q];
+   					genArray[0]=AA[i2];
+   					genArray[1]=BB[j];
+   					genArray[2]=CC[k];
+   					genArray[3]=DD[l];
+   					genArray[4]=EE[m];						
+   					genArray[5]=FF[n];
+   					genArray[6]=GG[q];
    				 Arrays.sort(genArray);
    					AllPossiblities.add(genArray);
+   								}
+   							}
    					 }
    					}
    				}
@@ -160,8 +166,8 @@ displayResult(AllPossiblities);
 //READING ARRAY SIZES
     	
       	int numSize[];
-   	numSize=new int[est];
-   	for(int t=0;t<est;t++){
+   	numSize=new int[9];
+   	for(int t=0;t<9;t++){
      String input = JOptionPane.showInputDialog
      ("Enter choice nums length for  "+(t+1));
  numSize[t]= Integer.parseInt(input);
@@ -173,6 +179,8 @@ displayResult(AllPossiblities);
    	e=numSize[4];
    	f=numSize[5];
    	g=numSize[6];
+   	h=numSize[7];
+   	i=numSize[8];
    	
    	A=new int[a];
    	B=new int[b];
@@ -181,6 +189,8 @@ displayResult(AllPossiblities);
    	E=new int[e];    	
    	F=new int[f];
    	G=new int[g];
+	H=new int[h];
+	I=new int[i];
    	
     
 // READING VALUES FOR ALL ARRAYS
@@ -221,6 +231,18 @@ displayResult(AllPossiblities);
    	G[p]=Integer.parseInt(num);
    	finalArrayList.add(Integer.parseInt(num));
    }
+   
+   for (int p= 0; p <h; p++){
+	   	String num=	JOptionPane.showInputDialog("Enter FAV num for H "+(p+1));
+	   	H[p]=Integer.parseInt(num);
+	   	finalArrayList.add(Integer.parseInt(num));
+	   }
+   
+   for (int p= 0; p <i; p++){
+	   	String num=	JOptionPane.showInputDialog("Enter FAV num for I "+(p+1));
+	   	I[p]=Integer.parseInt(num);
+	   	finalArrayList.add(Integer.parseInt(num));
+	   }
        
    // CONVERT ARRAYLIST TO ARRA
   Object[] fullArray=finalArrayList.toArray();
@@ -240,8 +262,8 @@ displayResult(AllPossiblities);
 //   Arrays.sort(G);
    
    // PRINT ARRAY
-   for(int g=0;g<convertedArray.length;g++)
-   	System.out.println(convertedArray[g]+"\t");		
+   for(int gs=0;gs<convertedArray.length;gs++)
+   	System.out.println(convertedArray[gs]+"\t");		
 	}
 
 	private static void getAllPossibles() {
@@ -285,7 +307,7 @@ displayResult(AllPossiblities);
 //    			if(count>1 && count<3 && !FinalResults.contains(drawFromPossible))
 //    				FinalResults.add(drawFromPossible);
     			if(count>=4)
-    				AllPossiblities.remove(j);
+    				AllPossiblities.remove(i);
     			}
     	}
     	    }  
