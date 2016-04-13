@@ -129,6 +129,7 @@ displayResult(AllPossiblities);
    // GENERATING FINAL NUMS COMBINATIONS        
    int i2,j,k,l,m,n,q,r,s;
    int[] genArray=new int[est];
+   a=AA.length;b=BB.length;c=CC.length;d=DD.length;e=EE.length;f=FF.length;g=GG.length;
    for(i2=0;i2<a;i2++){
    	for(j=0;j<b;j++){
    		for(k=0;k<c;k++){
