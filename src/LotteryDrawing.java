@@ -267,7 +267,7 @@ displayResult(AllPossiblities);
     				}
     			}
     			
-    			if(count>=2)  //>=2 IMP
+    			if(count>2)  //>=2 IMP
     				AllPossiblities.remove(j);
     			}
     	}
@@ -401,7 +401,7 @@ displayResult(AllPossiblities);
           	c++;
           	          }
              Arrays.sort(sheetData);
-             if(RecentResultsList.size()<=20){
+             if(RecentResultsList.size()<=30){
 RecentResultsList.add(sheetData);
              }
       }
