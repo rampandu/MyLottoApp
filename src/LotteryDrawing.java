@@ -70,9 +70,9 @@ import org.apache.poi.ss.usermodel.Row;
 //            filterResults(); 
 //            filterResults(); 
            
-//        	filterRepeatedNums();
+        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
-//        	filterRepeatedNums();
+        	filterRepeatedNums();
 //        	filterRepeatedNums();
         	
 //        	filterExcludeNums();
@@ -260,7 +260,7 @@ displayResult(AllPossiblities);
     				}
     			}
     			
-    			if(count>=3)  //>=2 IMP
+    			if(count>=2)  //>=2 IMP
     				AllPossiblities.remove(j);
     			}
     	}
