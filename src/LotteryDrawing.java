@@ -77,7 +77,7 @@ import org.apache.poi.ss.usermodel.Row;
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
-        	filterExcludeNums();
+        //-----	filterExcludeNums();
 //        	 getresult();
         	System.out.println("\n FINAL RESULTS are: \n");
             displayResult(AllPossiblities);
@@ -401,9 +401,9 @@ displayResult(AllPossiblities);
           	c++;
           	          }
              Arrays.sort(sheetData);
-             if(RecentResultsList.size()<=30){
+//             if(RecentResultsList.size()<=30){
 RecentResultsList.add(sheetData);
-             }
+//             }
       }
   } catch (IOException e) {
       e.printStackTrace();
