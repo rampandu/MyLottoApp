@@ -58,11 +58,13 @@ import org.apache.poi.ss.usermodel.Row;
       
 //       luckynumbers=ReadLuckyNumFromXL();
 //             getAllPossibles();
+      
        generatePossibleCombinations();
              printAllPossibleResults();
              
              AllRecentResults=ReadRecentResultsFromXL();
              printRecentResults();
+             generatePossEndDigits(AllRecentResults);
              
             getresult();
           printResults();
@@ -73,8 +75,8 @@ import org.apache.poi.ss.usermodel.Row;
 //        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
 //        	filterRepeatedNums();
-        	filterRepeatedNums();
-        	
+//        	filterRepeatedNums();
+//        	filterSameGroup()
 //        	filterExcludeNums();
 //        	filterExcludeNums();
         //-----	filterExcludeNums();
@@ -85,7 +87,22 @@ import org.apache.poi.ss.usermodel.Row;
           System.exit(0);
     }
     
-    private static void printResults() {
+    public static void generatePossEndDigits(ArrayList<Object> res){
+    	int[] drawFromFinal=new int[est];
+    	int[] testArray=new int[est];
+    	for(int a=0;a<res.size();a++){
+    		drawFromFinal=new int[est];
+    		drawFromFinal=(int[]) res.get(a);
+    		//TEST
+    		for(int h=0;h<est;h++)
+    			testArray[h]=drawFromFinal[h]%10;
+    		Arrays.sort(testArray);
+    		if(est==6)
+  	          System.out.println(testArray[0]+" "+testArray[1]+" "+testArray[2]+" "+testArray[3]+" "+testArray[4]+" "+testArray[5]+"  Result: "+a);         
+    	}
+    }
+
+	private static void printResults() {
     	System.out.println("\n Generated RESULTS are: \n");
     	  displayResult(AllPossiblities);		
 	}
@@ -258,8 +275,12 @@ displayResult(AllPossiblities);
     		
     		for(int j=0;j<AllRecentResults.size();j++){
     			count=0;
-    			drawFromRecent=(int[]) AllRecentResults.get(j);    			
-  			
+    			drawFromRecent=(int[]) AllRecentResults.get(j);   
+    			
+    			for(int h=0;h<est;h++)
+    				drawFromRecent[h]=drawFromRecent[h]%10;
+        		Arrays.sort(drawFromRecent);
+        		
     			for(x=0;x<est;x++){    				
     				for(y=0;y<est;y++){
     				if(drawFromPossible[x]==drawFromRecent[y])
@@ -268,7 +289,7 @@ displayResult(AllPossiblities);
     			}
     			
     			if(count>2)  //>=2 IMP
-    				AllPossiblities.remove(j);
+    				AllPossiblities.remove(i);
     			}
     	}
     	    }  
@@ -401,9 +422,9 @@ displayResult(AllPossiblities);
           	c++;
           	          }
              Arrays.sort(sheetData);
-//             if(RecentResultsList.size()<=30){
+             if(RecentResultsList.size()<=30){
 RecentResultsList.add(sheetData);
-//             }
+             }
       }
   } catch (IOException e) {
       e.printStackTrace();
