@@ -42,8 +42,8 @@ import org.apache.poi.ss.usermodel.Row;
     String input = JOptionPane.showInputDialog
           ("How many numbers do you need to draw?");
       est= Integer.parseInt(input);
-//      lucky=JOptionPane.showInputDialog("how many LUCKY numbers you have???");
-//	 	 lky=Integer.parseInt(lucky);  
+      lucky=JOptionPane.showInputDialog("how many LUCKY numbers you have???");
+	 	 lky=Integer.parseInt(lucky);  
 	 	 
 	 	 exclStr=JOptionPane.showInputDialog("how many EXCLUDE numbers you have???");
 	 	 excl=Integer.parseInt(exclStr);  
@@ -57,14 +57,15 @@ import org.apache.poi.ss.usermodel.Row;
   	 	}
       
 //       luckynumbers=ReadLuckyNumFromXL();
-//             getAllPossibles();
-       generatePossibleCombinations();
+             getAllPossibles();
+//     ----  generatePossibleCombinations();
              printAllPossibleResults();
              
              AllRecentResults=ReadRecentResultsFromXL();
              printRecentResults();
              
             getresult();
+            removeNullArrays();
           printResults();
 //            filterResults();   //temp
 //            filterResults(); 
@@ -73,11 +74,11 @@ import org.apache.poi.ss.usermodel.Row;
 //        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
 //        	filterRepeatedNums();
-        	filterRepeatedNums();
+//        	filterRepeatedNums();
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
-        	filterExcludeNums();
+//        	filterExcludeNums();
 //        	 getresult();
         	System.out.println("\n FINAL RESULTS are: \n");
             displayResult(AllPossiblities);
@@ -85,7 +86,17 @@ import org.apache.poi.ss.usermodel.Row;
           System.exit(0);
     }
     
-    private static void printResults() {
+    private static void removeNullArrays() {
+    	int[] drawFromFinal=new int[est];
+    	for(int a=0;a<AllPossiblities.size();a++){
+    		drawFromFinal=new int[est];
+    		drawFromFinal=(int[]) AllPossiblities.get(a);
+    		if(drawFromFinal==null)
+    			AllPossiblities.remove(a);
+    	}
+	}
+
+	private static void printResults() {
     	System.out.println("\n Generated RESULTS are: \n");
     	  displayResult(AllPossiblities);		
 	}
@@ -107,6 +118,7 @@ displayResult(AllPossiblities);
     	  	for(int s=0;s<AllPossiblities.size();s++){
 			draw=(int[])AllPossiblities.get(s);
 			count=0;
+			if(draw!=null){
 			for(x=0;x<est;x++){				
 				for(y=0;y<excl;y++){
 					if(draw[x]==excludenumbers[y]){
@@ -115,12 +127,12 @@ displayResult(AllPossiblities);
 					
 				}
     	}
-			if(count>=3){
+			if(count>=2){
 //				FilteredResults.add(s);
 				AllPossiblities.remove(s);
 			}
     	  	}
-		
+    	  	}
 	}
 
 	private static void generatePossibleCombinations() {
@@ -230,9 +242,14 @@ displayResult(AllPossiblities);
 
 	
 	private static void getAllPossibles() {
-    	 for(m=0;m<100;m++){   	
+    	 for(m=0;m<50000;m++){   	
     	    	lky=Integer.parseInt(lucky);
-    	    	numbersCopy = Arrays.copyOf(luckynumbers, luckynumbers.length);
+    	    	try {
+					numbersCopy = ReadLuckyNumFromXL();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     	 
     	    	 result=new int[est];
     	      for (int i = 0; i < est; i++){
@@ -251,6 +268,8 @@ displayResult(AllPossiblities);
 		System.out.println("filtering recent results");
    	int[] drawFromPossible=new int[est];
     	int[] drawFromRecent=new int[est];
+    	int[] tempArray=new int[est];
+    	tempArray=null;
     	int x,y,count;
     	for(int i=0;i<AllPossiblities.size();i++){
     		drawFromPossible=new int[est];
@@ -267,20 +286,21 @@ displayResult(AllPossiblities);
     				}
     			}
     			
-    			if(count>=3)  //>=2 IMP
-    				AllPossiblities.remove(j);
+    			if(count>=2)  //>=2 IMP
+    				AllPossiblities.set(i, tempArray);
     			}
     	}
     	    }  
     
     	public static void displayResult(ArrayList<Object> res){
     	int[] drawFromFinal=new int[est];
+    	int y=0;
     	for(int a=0;a<res.size();a++){
     		drawFromFinal=new int[est];
     		drawFromFinal=(int[]) res.get(a);
-    		if(est==6)
-  	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+a);         
-  	       else if(est==7)
+    		if(est==6 && drawFromFinal!=null)
+  	          System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+"  Result: "+(y++));         
+  	       else if(est==7 && drawFromFinal!=null)
   	    	   System.out.println(drawFromFinal[0]+" "+drawFromFinal[1]+" "+drawFromFinal[2]+" "+drawFromFinal[3]+" "+drawFromFinal[4]+" "+drawFromFinal[5]+" "+drawFromFinal[6]+"  Result: "+a); 
     	}
     }
@@ -317,9 +337,10 @@ displayResult(AllPossiblities);
 			for(int p=1;p<AllPossiblities.size();p++){	
 				draw2=(int[])AllPossiblities.get(p);
 				 count=0;
-				 if(s!=(p-1)){
+				 if(s!=(p-1) && draw1!=null && draw2!=null){
 			for(x=0;x<est;x++){				
 				for(y=0;y<est;y++){
+				
 					if(draw1[x]==draw2[y]){
 						count++;
 					}
