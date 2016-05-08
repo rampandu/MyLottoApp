@@ -58,13 +58,15 @@ import org.apache.poi.ss.usermodel.Row;
       
 //       luckynumbers=ReadLuckyNumFromXL();
              getAllPossibles();
-//     ----  generatePossibleCombinations();
+//      generatePossibleCombinations();
              printAllPossibleResults();
              
              AllRecentResults=ReadRecentResultsFromXL();
              printRecentResults();
              
-            getresult();
+//             filterResults();  
+             
+             getresult();
             removeNullArrays();
           printResults();
 //            filterResults();   //temp
@@ -74,7 +76,7 @@ import org.apache.poi.ss.usermodel.Row;
 //        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
 //        	filterRepeatedNums();
-//        	filterRepeatedNums();
+        	filterRepeatedNums();
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
@@ -242,7 +244,7 @@ displayResult(AllPossiblities);
 
 	
 	private static void getAllPossibles() {
-    	 for(m=0;m<50000;m++){   	
+    	 for(m=0;m<5000;m++){   	
     	    	lky=Integer.parseInt(lucky);
     	    	try {
 					numbersCopy = ReadLuckyNumFromXL();
@@ -286,7 +288,7 @@ displayResult(AllPossiblities);
     				}
     			}
     			
-    			if(count>=2)  //>=2 IMP
+    			if(count>2)  //>=2 IMP
     				AllPossiblities.set(i, tempArray);
     			}
     	}
@@ -320,7 +322,7 @@ displayResult(AllPossiblities);
     			else oddCount++;
     		}
 //    	if(evenCount<3 || evenCount>5 || oddCount<3 || oddCount>4)
-    		if(oddCount<4 || oddCount>5)
+    		if(oddCount>=4 || evenCount>=4)
     		AllPossiblities.remove(a);
     	}
 	}
@@ -420,7 +422,7 @@ displayResult(AllPossiblities);
           	c++;
           	          }
              Arrays.sort(sheetData);
-             if(RecentResultsList.size()<=20){
+             if(RecentResultsList.size()<=30){
 RecentResultsList.add(sheetData);
              }
       }
