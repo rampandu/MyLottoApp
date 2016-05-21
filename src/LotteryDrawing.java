@@ -277,9 +277,9 @@ displayResult(AllPossiblities);
     			count=0;
     			drawFromRecent=(int[]) AllRecentResults.get(j);   
     			
-    			for(int h=0;h<est;h++)
-    				drawFromRecent[h]=drawFromRecent[h]%10;
-        		Arrays.sort(drawFromRecent);
+//    			for(int h=0;h<est;h++)
+//    				drawFromRecent[h]=drawFromRecent[h]%10;
+//        		Arrays.sort(drawFromRecent);
         		
     			for(x=0;x<est;x++){    				
     				for(y=0;y<est;y++){
