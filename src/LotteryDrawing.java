@@ -45,23 +45,29 @@ import org.apache.poi.ss.usermodel.Row;
       lucky=JOptionPane.showInputDialog("how many LUCKY numbers you have???");
 	 	 lky=Integer.parseInt(lucky);  
 	 	 
-	 	 exclStr=JOptionPane.showInputDialog("how many EXCLUDE numbers you have???");
-	 	 excl=Integer.parseInt(exclStr);  
-	 	excludenumbers = new int[excl];
-           
-      //EXCLUDE NUMS
-	 	int d;
-      for (d=0;d<excl;d++){
-   	 String exclnum=	JOptionPane.showInputDialog("Enter your "+(d+1)+"EXCLUDE number of "+excl);
-  	 	excludenumbers[d]=Integer.parseInt(exclnum);
-  	 	}
+	 	  //EXCLUDE NUMS
+//	 	 exclStr=JOptionPane.showInputDialog("how many EXCLUDE numbers you have???");
+//	 	 excl=Integer.parseInt(exclStr);  
+//	 	excludenumbers = new int[excl];
+//           
+//    
+//	 	int d;
+//      for (d=0;d<excl;d++){
+//   	 String exclnum=	JOptionPane.showInputDialog("Enter your "+(d+1)+"EXCLUDE number of "+excl);
+//  	 	excludenumbers[d]=Integer.parseInt(exclnum);
+//  	 	}
       
 //       luckynumbers=ReadLuckyNumFromXL();
-             getAllPossibles();
-//      generatePossibleCombinations();
+	 	
+//---------------------------------------------------------------------------------------------------------------	 	 
+	 	 
+	 	 AllRecentResults=ReadRecentResultsFromXL();
+//	 	 generateLukyNums();
+        getAllPossibles();
+//   ----   generatePossibleCombinations();
              printAllPossibleResults();
              
-             AllRecentResults=ReadRecentResultsFromXL();
+            
              printRecentResults();
              
 //             filterResults();  
@@ -73,10 +79,10 @@ import org.apache.poi.ss.usermodel.Row;
 //            filterResults(); 
 //            filterResults(); 
            
-//        	filterRepeatedNums();
+        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
 //        	filterRepeatedNums();
-        	filterRepeatedNums();
+//        	filterRepeatedNums();
         	
 //        	filterExcludeNums();
 //        	filterExcludeNums();
@@ -88,7 +94,23 @@ import org.apache.poi.ss.usermodel.Row;
           System.exit(0);
     }
     
-    private static void removeNullArrays() {
+    private static void generateLukyNums() {
+int[] latestDraw=new int[est];
+latestDraw=(int[]) AllRecentResults.get(0);
+for(int z=0;z<49;z++){	
+	luckynumbers[z]=z+1;
+}
+
+for(int x=0;x<49;x++){
+	if(luckynumbers[x]==latestDraw[0] || luckynumbers[x]==latestDraw[1] || luckynumbers[x]==latestDraw[2] || luckynumbers[x]==latestDraw[3] || luckynumbers[x]==latestDraw[4] || luckynumbers[x]==latestDraw[5] )
+luckynumbers[x]=0;
+}
+lky=luckynumbers.length;
+
+    	
+	}
+
+	private static void removeNullArrays() {
     	int[] drawFromFinal=new int[est];
     	for(int a=0;a<AllPossiblities.size();a++){
     		drawFromFinal=new int[est];
@@ -339,7 +361,7 @@ displayResult(AllPossiblities);
 			for(int p=1;p<AllPossiblities.size();p++){	
 				draw2=(int[])AllPossiblities.get(p);
 				 count=0;
-				 if(s!=(p-1) && draw1!=null && draw2!=null){
+				 if(s!=p && draw1!=null && draw2!=null){
 			for(x=0;x<est;x++){				
 				for(y=0;y<est;y++){
 				
@@ -422,7 +444,7 @@ displayResult(AllPossiblities);
           	c++;
           	          }
              Arrays.sort(sheetData);
-             if(RecentResultsList.size()<=30){
+             if(RecentResultsList.size()<=30){  //30
 RecentResultsList.add(sheetData);
              }
       }
