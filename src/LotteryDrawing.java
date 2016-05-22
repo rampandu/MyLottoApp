@@ -64,7 +64,7 @@ import org.apache.poi.ss.usermodel.Row;
              
              AllRecentResults=ReadRecentResultsFromXL();
              printRecentResults();
-             generatePossEndDigits(AllRecentResults);
+//             generatePossEndDigits(AllRecentResults);
              
             getresult();
           printResults();
@@ -72,7 +72,7 @@ import org.apache.poi.ss.usermodel.Row;
 //            filterResults(); 
 //            filterResults(); 
            
-//        	filterRepeatedNums();
+        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
 //        	filterRepeatedNums();
 //        	filterRepeatedNums();
@@ -352,7 +352,7 @@ displayResult(AllPossiblities);
 			}
 			 
 			}
-				 if(count>=4){  //>=3 IMP
+				 if(count>=3){  //>=3 IMP
 						AllPossiblities.remove(p);
 				 }
 			
