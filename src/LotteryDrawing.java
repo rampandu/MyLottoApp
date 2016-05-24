@@ -70,7 +70,7 @@ import org.apache.poi.ss.usermodel.Row;
 //            filterResults(); 
 //            filterResults(); 
            
-//        	filterRepeatedNums();
+        	filterRepeatedNums();
 //        	displayResult(FilteredResults);
 //        	filterRepeatedNums();
 //        	filterRepeatedNums();
@@ -329,7 +329,7 @@ displayResult(AllPossiblities);
 			}
 			 
 			}
-				 if(count>=4){  //>=3 IMP
+				 if(count>=3){  //>=3 IMP
 						AllPossiblities.remove(p);
 				 }
 			
@@ -376,7 +376,7 @@ displayResult(AllPossiblities);
     
     
     public static ArrayList<Object> ReadRecentResultsFromXL() throws Exception {
-        String filename = "recentresults.xls";
+        String filename = "recentresults2.xls";
    int[] sheetData;
    ArrayList<Object> RecentResultsList=new ArrayList<>();
    FileInputStream fis = null;
